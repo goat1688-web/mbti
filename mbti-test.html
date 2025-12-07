@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>和 Sam 一起升级大脑 · MBTI 200 题自测</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #fde7cf 0, #fdf3e4 40%, #f7efe8 100%);
+      color: #333;
+    }
+
+    .page {
+      max-width: 840px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 40px 16px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px 20px 24px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    @media (min-width: 720px) {
+      .card {
+        padding: 40px 32px 32px;
+      }
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .logo-row img {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      object-fit: contain;
+    }
+
+    .logo-row span {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #b08a63;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #666;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .intro strong {
+      color: #b86a2e;
+      font-weight: 600;
+    }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: #f1f1f1;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #f3a255, #f27b4c);
+      transition: width 0.25s ease-out;
+    }
+
+    .question-text {
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid #e7e0d7;
+      background: #faf7f3;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.6;
+      cursor: pointer;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+    }
+
+    .option-btn-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid #f3b37b;
+      color: #f29a52;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .option-btn-text {
+      flex: 1;
+    }
+
+    .option-btn:hover {
+      border-color: #f1b07a;
+      background: #fff8f1;
+      transform: translateY(-1px);
+    }
+
+    .option-btn:active {
+      transform: translateY(0);
+      background: #ffeede;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      font-size: 11px;
+      color: #aaa;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .result-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .result-type {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+      color: #b86a2e;
+    }
+
+    .result-block {
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .result-pairs {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: #faf7f3;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .restart-btn {
+      margin-top: 16px;
+      width: 100%;
+      max-width: 220px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #333;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.05s ease;
+    }
+
+    .restart-btn:hover {
+      background: #111;
+      transform: translateY(-1px);
+    }
+
+    .restart-btn:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="logo-row">
+        <!-- 如果同目录下有 logo.png 就会显示小脑袋 Logo，没有也没关系 -->
+        <img src="logo.png" alt="和 Sam 一起升级大脑" onerror="this.style.display='none'" />
+        <span>Sam's Brain Upgrade Lab</span>
+      </div>
+      <div class="title">这份 200 题测试，看看你的 MBTI 倾向</div>
+      <div class="subtitle">和 Sam 一起升级大脑 · MBTI 风格自测（非官方量表）</div>
+      <div class="intro">
+        共 <strong>200 题</strong>，每题只有两个选项。<br/>
+        不用想“标准答案”，请选<strong>「更像你平时的反应」</strong>。<br/>
+        做完后，会给出你的 <strong>4 个字母类型</strong>，以及每一维度的粗略分数。
+      </div>
+
+      <div id="quiz-section">
+        <div class="progress">
+          <div id="progress-text">第 1 / 200 题</div>
+          <div id="dimension-text"></div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar-inner" id="progress-bar-inner"></div>
+        </div>
+
+        <div id="question-text" class="question-text"></div>
+        <div class="options" id="options-container"></div>
+      </div>
+
+      <div id="result-section" class="hidden">
+        <div class="result-type" id="result-type">INFP</div>
+        <div class="result-title">这是你目前比较接近的 MBTI 倾向</div>
+        <div class="result-block" id="result-summary">
+          （这里先写一个简单版本，后面我们可以一起把每个类型的详细解读改成你的小红书风格文案。）
+        </div>
+        <div class="result-pairs" id="result-pairs"></div>
+        <button class="restart-btn" onclick="restartQuiz()">重新做一次</button>
+      </div>
+
+      <div class="footer-note">
+        说明：本页为 MBTI 风格自测题库，供自我觉察使用，不等同于专业人格测验或心理诊断结果。<br/>
+        © 2025 和 Sam 一起升级大脑 · MBTI 200 题实验版
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 题目数据：A / B 各对应一个维度字母
+    const questions = [
+      // 1–50：E / I
+      { id: 1, text: "周末突然有空，你更想：", aText: "赶紧约人一起出去玩", bText: "留在家里，一个人安静待着", aSide: "E", bSide: "I" },
+      { id: 2, text: "在陌生聚会上，你通常：", aText: "很快就能和几个人聊起来", bText: "先观察一圈，慢慢再决定要不要说话", aSide: "E", bSide: "I" },
+      { id: 3, text: "工作中遇到好消息，你会：", aText: "立刻想发给朋友/同事一起开心", bText: "先在心里默默乐一会儿", aSide: "E", bSide: "I" },
+      { id: 4, text: "别人觉得你：", aText: "话多、反应快、存在感强", bText: "安静、内敛、需要熟了才会打开", aSide: "E", bSide: "I" },
+      { id: 5, text: "你更喜欢的聊天方式是：", aText: "一大群人一起互相插话、开玩笑", bText: "和一两个人深入聊很久", aSide: "E", bSide: "I" },
+      { id: 6, text: "去线下活动前，你的感觉更接近：", aText: "有点兴奋，期待认识新朋友", bText: "有点紧张，担心社交会耗光能量", aSide: "E", bSide: "I" },
+      { id: 7, text: "旅行时，你会：", aText: "主动和旅店、导游、路人攀谈", bText: "只在必要的时候才开口问路", aSide: "E", bSide: "I" },
+      { id: 8, text: "别人临时喊你出门，你：", aText: "大概率会爽快答应", bText: "内心先挣扎一会儿，看自己还有没有电", aSide: "E", bSide: "I" },
+      { id: 9, text: "在群聊里，你：", aText: "经常活跃，发消息、玩梗", bText: "大部分时间潜水，偶尔冒泡", aSide: "E", bSide: "I" },
+      { id: 10, text: "被安排做一个分享，你：", aText: "有压力但也觉得机会不错", bText: "第一反应是能不能推掉", aSide: "E", bSide: "I" },
+      { id: 11, text: "你觉得自己擅长：", aText: "在场面上活跃气氛", bText: "在一对一时听对方倾诉", aSide: "E", bSide: "I" },
+      { id: 12, text: "认识新朋友时，你更常：", aText: "先介绍自己，再问对方", bText: "先听对方讲，自己说得很少", aSide: "E", bSide: "I" },
+      { id: 13, text: "长时间一个人独处，你会：", aText: "觉得有点寂寞，想找人说话", bText: "觉得很舒服，这是充电时间", aSide: "E", bSide: "I" },
+      { id: 14, text: "别人评价你更可能是：", aText: "外向、健谈、有趣", bText: "安静、神秘、有自己的小世界", aSide: "E", bSide: "I" },
+      { id: 15, text: "在办公室/教室里，你的位置更可能：", aText: "靠中间或门口，方便看见大家", bText: "靠角落或边缘，比较有安全感", aSide: "E", bSide: "I" },
+      { id: 16, text: "你更习惯：", aText: "把心情直接发在朋友圈/动态", bText: "只和极少几个人私聊", aSide: "E", bSide: "I" },
+      { id: 17, text: "参加同学会，你：", aText: "会主动到处打招呼", bText: "找几个人坐定，基本不乱走动", aSide: "E", bSide: "I" },
+      { id: 18, text: "对你来说，声音更大的是：", aText: "外面的世界：话题、活动、社交", bText: "你内心的想法、感受和小剧场", aSide: "E", bSide: "I" },
+      { id: 19, text: "感到压力时，你会：", aText: "约人出去走走、说说话", bText: "想一个人待着整理思绪", aSide: "E", bSide: "I" },
+      { id: 20, text: "在团队合作里，你：", aText: "会不知不觉变成“发言人”", bText: "更习惯在后面做安静的支持", aSide: "E", bSide: "I" },
+      { id: 21, text: "你做决定时，会：", aText: "想先问问别人怎么想", bText: "更依赖自己内心的感觉", aSide: "E", bSide: "I" },
+      { id: 22, text: "排队时前后有人跟你搭话，你：", aText: "大概率会聊起来", bText: "一般礼貌回应两句就结束", aSide: "E", bSide: "I" },
+      { id: 23, text: "与其发长文，你更常：", aText: "打语音、视频聊清楚", bText: "慢慢打字，把话组织好", aSide: "E", bSide: "I" },
+      { id: 24, text: "你觉得哪种更累：", aText: "一整天一个人", bText: "一整天都有人在身边说话", aSide: "E", bSide: "I" },
+      { id: 25, text: "当你进入一个新环境，你会：", aText: "先主动介绍自己、很快融入", bText: "先观察氛围，找到安全感再行动", aSide: "E", bSide: "I" },
+      { id: 26, text: "朋友会因为你而：", aText: "认识更多朋友", bText: "更了解自己", aSide: "E", bSide: "I" },
+      { id: 27, text: "聚会结束后，你：", aText: "还在兴奋，回味大家说的话", bText: "有点虚脱，需要躺平", aSide: "E", bSide: "I" },
+      { id: 28, text: "你更享受：", aText: "当“主角”，被大家围在中间", bText: "坐在边上安静观察人群", aSide: "E", bSide: "I" },
+      { id: 29, text: "工作中如果必须频繁打电话，你会：", aText: "觉得没什么，甚至挺好", bText: "每次拨号前都要酝酿一下", aSide: "E", bSide: "I" },
+      { id: 30, text: "在社交媒体上，你：", aText: "经常发、互动多", bText: "偶尔发一下，甚至很久不发", aSide: "E", bSide: "I" },
+      { id: 31, text: "你更容易：", aText: "认识很多“泛泛之交”", bText: "拥有非常少但很深的朋友", aSide: "E", bSide: "I" },
+      { id: 32, text: "对你来说“热闹”的感受是：", aText: "被人包围很有活力", bText: "噪音太多，有点窒息", aSide: "E", bSide: "I" },
+      { id: 33, text: "当别人突然问你意见时，你：", aText: "直接把当下想法说出来", bText: "会先愣一下再组织语言", aSide: "E", bSide: "I" },
+      { id: 34, text: "旅行想象画面中，你更偏向：", aText: "和一群朋友自驾、聚会", bText:
