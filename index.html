@@ -256,27 +256,39 @@
         <span>和 Sam 一起升级大脑</span>
       </div>
 <div class="footer">
-  © 2025 和 Sam 一起升级大脑 · 性格小测试（体验版）
-</div> 
-      <div class="footer-note">
-  本页面为个人自我探索工具，参考 MBTI 理论，但与 MBTI® 官方测评及 Myers-Briggs Company 无关。
+  <!-- 页脚上方的小字说明 -->
+      <div class="page-note">
+        © 2025 和 Sam 一起升级大脑 · 性格小测试（体验版）<br>
+        本页面为个人自我探索工具，参考 MBTI 理论，但与 MBTI® 官方测评及 Myers-Briggs Company 无关。
       </div>
 
-      <div class="progress-line">
-        <span id="progress-text">第 1 / 20 题</span>
-        <div class="progress-bar-wrap">
-          <div id="progress-bar" class="progress-bar"></div>
+      <!-- 进度条 + 标题介绍 -->
+      <div class="quiz-header">
+        <div class="progress">
+          <span class="progress-text">
+            第 <span id="current-question">1</span> / <span id="total-question">20</span> 题
+          </span>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="quiz-intro">
+          <div class="quiz-title-en">PERSONALITY CHECK · RELATIONSHIP WITH YOURSELF</div>
+          <h1 class="quiz-title">这 20 道题，先帮你看清自己的性格倾向</h1>
+          <p class="quiz-subtitle">
+            本小测试灵感来自 MBTI 理论，用于「自我认识练习」。并非官方 MBTI® 测评，
+            答题时请尽量根据自己「平时最常见的状态」来选择。
+          </p>
         </div>
       </div>
-<div class="quiz-intro">
-    <div class="quiz-title-en">PERSONALITY CHECK · RELATIONSHIP WITH YOURSELF</div>
-    <h1 class="quiz-title">这 20 道题，先帮你看清自己的性格倾向</h1>
-    <p class="quiz-subtitle">
-      本小测试灵感来自 MBTI 理论，用于「自我认识练习」。并非官方 MBTI® 测评，
-      答题时请尽量按照「平时最常见的状态」来选择。
-    </p>
-</div>
-      <div id="question-text" class="question-text">正在加载题目…</div>
+
+      <!-- 题目区 -->
+      <div class="question-block">
+        <div class="question-text" id="question-text">正在加载题目…</div>
+        <div class="options" id="options"></div>
+        <div class="tip">* 单选题，点了选项会自动跳到下一题。</div>
+      </div>
       <div id="options" class="options"></div>
       <div class="hint">* 单选题，点了选项会自动跳到下一题。</div>
     </div>
