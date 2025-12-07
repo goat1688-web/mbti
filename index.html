@@ -170,7 +170,22 @@
       justify-content: center;
       font-size: 13px;
       flex-shrink: 0;
-    }
+    }.option {
+  width: 100%;
+  padding: 14px 20px;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.04);
+  background-color: #fff;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.option-selected {
+  border-color: #ffb48a;
+  background: #fff5ed;
+}
 
     .option-text {
       flex: 1;
@@ -235,7 +250,32 @@
 
     .hidden {
       display: none !important;
-    }
+    }.nav-buttons {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#prevBtn {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.85);
+  color: #777;
+  cursor: pointer;
+}
+
+#prevBtn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* 可选：返回上一题时，把已选选项标出来 */
+.option.selected {
+  border-color: rgba(255,153,102,0.8);
+  background: rgba(255,243,236,0.95);
+}
   </style>
 </head>
 <body>
@@ -269,7 +309,9 @@
       <div class="question-meta">第 <span id="questionNumber">1</span> 题 / 共 <span id="questionTotal">20</span> 题</div>
       <div id="questionText" class="question-text">正在加载题目…</div>
       <div id="optionsContainer" class="options"></div>
-
+<div class="nav-buttons">
+  <button id="prevBtn" class="btn-ghost" type="button">← 上一题</button>
+</div>
       <p class="tip-text">
         * 单选题，点了选项会自动跳到下一题。<br />
         * 如果遇到很难选的题，可以先凭第一反应作答，后面慢慢再复盘。
@@ -524,71 +566,117 @@ const questions = [
 ];
 
     const letters = ["A", "B", "C", "D", "E"];
-    const total = questions.length;
+    const total = questions.length
+  // 题目数据（示意：这里还是你原来的 20 题数组，不用改名字，只要保持结构一样）
+  const questions = window.questions || [];
 
-    const qIndexEl = document.getElementById("qIndex");
-    const qTotalEl = document.getElementById("qTotal");
-    const questionNumberEl = document.getElementById("questionNumber");
-    const questionTotalEl = document.getElementById("questionTotal");
-    const questionTextEl = document.getElementById("questionText");
-    const optionsContainer = document.getElementById("optionsContainer");
-    const resultCard = document.getElementById("resultCard");
+  // 缓存 DOM 元素
+  const qIndexSpan = document.getElementById("qIndex");
+  const qTotalSpan = document.getElementById("qTotal");
+  const questionNumberSpan = document.getElementById("questionNumber");
+  const questionTextDiv = document.getElementById("questionText");
+  const optionsContainer = document.getElementById("optionsContainer");
+  const prevBtn = document.getElementById("prevBtn");
+  const resultCard = document.getElementById("resultCard");
+  const questionMeta = document.querySelector(".question-meta");
+  const questionTextBlock = document.querySelector(".question-text");
+  const navButtons = document.querySelector(".nav-buttons");
+  const tipsText = document.querySelector(".tip-text");
 
-    qTotalEl.textContent = total;
-    questionTotalEl.textContent = total;
+  // 当前题号 & 作答记录
+  let currentIndex = 0;
+  const answers = new Array(questions.length).fill(null);
 
-    let currentIndex = 0;
-    const answers = [];
+  // 总题数
+  qTotalSpan.textContent = questions.length;
 
-    function renderQuestion() {
-      if (currentIndex >= total) {
-        // 问题答完，展示完成提示
-        questionTextEl.textContent = "本轮 20 道题已全部完成。";
-        optionsContainer.innerHTML = "";
-        document.getElementById("progress").classList.add("hidden");
-        document.querySelector(".question-meta").classList.add("hidden");
-        resultCard.style.display = "block";
-        return;
+  // 渲染当前题目
+  function renderQuestion() {
+    const q = questions[currentIndex];
+
+    // 更新题号
+    const showIndex = currentIndex + 1;
+    qIndexSpan.textContent = showIndex;
+    questionNumberSpan.textContent = showIndex;
+
+    // 更新题干
+    questionTextDiv.textContent = q.text;
+
+    // 清空并重新渲染选项
+    optionsContainer.innerHTML = "";
+
+    q.options.forEach((optText, idx) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "option";
+
+      // 选项前面的 A/B/C/D/E
+      const label = String.fromCharCode(65 + idx); // 65 = A
+
+      btn.textContent = label + "  " + optText;
+
+      // 如果这一题之前已经选过，就高亮
+      if (answers[currentIndex] === idx) {
+        btn.classList.add("option-selected");
       }
 
-      const q = questions[currentIndex];
-      qIndexEl.textContent = currentIndex + 1;
-      questionNumberEl.textContent = currentIndex + 1;
-      questionTextEl.textContent = q.text;
+      btn.addEventListener("click", () => {
+        // 记录答案
+        answers[currentIndex] = idx;
 
-      optionsContainer.innerHTML = "";
-      q.options.forEach((optText, idx) => {
-        const btn = document.createElement("button");
-        btn.className = "option-btn";
-
-        const label = document.createElement("div");
-        label.className = "option-label";
-        label.textContent = letters[idx];
-
-        const text = document.createElement("div");
-        text.className = "option-text";
-        text.textContent = optText;
-
-        btn.appendChild(label);
-        btn.appendChild(text);
-
-        btn.addEventListener("click", () => {
-          answers.push({
-            questionId: q.id,
-            index: idx,
-            letter: letters[idx] || "",
-            text: optText
-          });
+        // 自动跳到下一题或展示结果
+        if (currentIndex < questions.length - 1) {
           currentIndex++;
           renderQuestion();
-        });
-
-        optionsContainer.appendChild(btn);
+        } else {
+          showResult();
+        }
       });
-    }
 
-    // 初始化
-    renderQuestion();
-  </script>
+      optionsContainer.appendChild(btn);
+    });
+
+    // 第一题时不允许点“上一题”
+    prevBtn.disabled = currentIndex === 0;
+
+    // 确保题目区域可见、结果卡片隐藏
+    questionMeta.style.display = "block";
+    questionTextBlock.style.display = "block";
+    optionsContainer.style.display = "block";
+    navButtons.style.display = "flex";
+    tipsText.style.display = "block";
+    resultCard.style.display = "none";
+  }
+
+  // 上一题按钮
+  prevBtn.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      renderQuestion();
+    }
+  });
+
+  // 展示“完成 20 题”的提示（暂时不算 MBTI 结果）
+  function showResult() {
+    questionMeta.style.display = "none";
+    questionTextBlock.style.display = "none";
+    optionsContainer.style.display = "none";
+    navButtons.style.display = "none";
+    tipsText.style.display = "none";
+    resultCard.style.display = "block";
+
+    // 这里后面可以接“200 题完整版”或者 MBTI 结果页
+    // 现在先当成练习版的结束画面
+  }
+
+  // 页面加载完毕后，开始渲染第 1 题
+  document.addEventListener("DOMContentLoaded", () => {
+    if (questions.length > 0) {
+      renderQuestion();
+    } else {
+      questionTextDiv.textContent = "题目加载失败，请稍后刷新再试。";
+    }
+  });
+</script>
 </body>
 </html>
