@@ -2162,92 +2162,87 @@ const questions = [
   // 以下是控制逻辑：显示题目 / 记录答案 / 上一题
   // =========================
 
-  const qIndexSpan = document.getElementById("qIndex");
-  const qTotalSpan = document.getElementById("qTotal");
-  const questionNumberSpan = document.getElementById("questionNumber");
-  const questionTextDiv = document.getElementById("questionText");
-  const optionsContainer = document.getElementById("optionsContainer");
-  const prevBtn = document.getElementById("prevBtn");
-  const resultCard = document.getElementById("resultCard");
-  const questionMeta = document.querySelector(".question-meta");
-  const questionTextBlock = document.querySelector(".question-text");
-  const navButtons = document.querySelector(".nav-buttons");
-  const tipsText = document.querySelector(".tip-text");
+  const qIndexSpan = document.getElementById("qIndex");  
+const questionNumberSpan = document.getElementById("questionNumber");  // 添加这个定义
+const questionTextDiv = document.querySelector(".question-text");  // 添加这个定义
+const optionsContainer = document.getElementById("optionsContainer");  // 添加这个定义
+const navButtons = document.querySelector(".nav-buttons");  
+const tipsText = document.querySelector(".tip-text");
+const prevBtn = document.getElementById("prevBtn");  // 添加这个定义
+const resultCard = document.getElementById("resultCard");  // 添加这个定义
+const qTotalSpan = document.getElementById("qTotal"); // 添加这个定义
 
-  let currentIndex = 0;
-  const answers = new Array(questions.length).fill(null);
+let currentIndex = 0;  
+const answers = new Array(questions.length).fill(null);
+qTotalSpan.textContent = questions.length;
 
-  qTotalSpan.textContent = questions.length;
+function renderQuestion() {    
+  const q = questions[currentIndex];    
+  const showIndex = currentIndex + 1;
+  
+  qIndexSpan.textContent = showIndex;    
+  questionNumberSpan.textContent = showIndex;    
+  questionTextDiv.textContent = q.text;
+  
+  optionsContainer.innerHTML = "";
+  q.options.forEach((optText, idx) => {      
+    const btn = document.createElement("button");      
+    btn.type = "button";      
+    btn.className = "option";
+    const label = String.fromCharCode(65 + idx); // A/B/C/D/E      
+    btn.textContent = label + "  " + optText;
 
-  function renderQuestion() {
-    const q = questions[currentIndex];
-    const showIndex = currentIndex + 1;
+    if (answers[currentIndex] === idx) {        
+      btn.classList.add("option-selected");      
+    }
 
-    qIndexSpan.textContent = showIndex;
-    questionNumberSpan.textContent = showIndex;
-    questionTextDiv.textContent = q.text;
-
-    optionsContainer.innerHTML = "";
-
-    q.options.forEach((optText, idx) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "option";
-
-      const label = String.fromCharCode(65 + idx); // A/B/C/D/E
-      btn.textContent = label + "  " + optText;
-
-      if (answers[currentIndex] === idx) {
-        btn.classList.add("option-selected");
-      }
-
-      btn.addEventListener("click", () => {
-        answers[currentIndex] = idx;
-        if (currentIndex < questions.length - 1) {
-          currentIndex++;
-          renderQuestion();
-        } else {
-          showResult();
-        }
-      });
-
-      optionsContainer.appendChild(btn);
+    btn.addEventListener("click", () => {        
+      answers[currentIndex] = idx;        
+      if (currentIndex < questions.length - 1) {          
+        currentIndex++;          
+        renderQuestion();        
+      } else {          
+        showResult();        
+      }      
     });
 
-    prevBtn.disabled = currentIndex === 0;
-
-    questionMeta.style.display = "block";
-    questionTextBlock.style.display = "block";
-    optionsContainer.style.display = "block";
-    navButtons.style.display = "flex";
-    tipsText.style.display = "block";
-    resultCard.style.display = "none";
-  }
-
-  prevBtn.addEventListener("click", () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      renderQuestion();
-    }
+    optionsContainer.appendChild(btn);    
   });
 
-  function showResult() {
-    questionMeta.style.display = "none";
-    questionTextBlock.style.display = "none";
-    optionsContainer.style.display = "none";
-    navButtons.style.display = "none";
-    tipsText.style.display = "none";
-    resultCard.style.display = "block";
-    // 这里暂时只是练习版的“完成 20 题”提示
-  }
+  prevBtn.disabled = currentIndex === 0;
+  questionMeta.style.display = "block";    
+  questionTextDiv.style.display = "block";    
+  optionsContainer.style.display = "block";    
+  navButtons.style.display = "flex";    
+  tipsText.style.display = "block";    
+  resultCard.style.display = "none";  
+}
 
-  document.addEventListener("DOMContentLoaded", () => {
-    if (questions.length > 0) {
-      renderQuestion();
-    } else {
-      questionTextDiv.textContent = "题目加载失败，请稍后刷新再试。";
-    }
-  });
+prevBtn.addEventListener("click", () => {    
+  if (currentIndex > 0) {      
+    currentIndex--;      
+    renderQuestion();    
+  }  
+});
+
+function showResult() {    
+  questionMeta.style.display = "none";    
+  questionTextDiv.style.display = "none";    
+  optionsContainer.style.display = "none";    
+  navButtons.style.display = "none";    
+  tipsText.style.display = "none";    
+  resultCard.style.display = "block";    
+  // 这里暂时只是练习版的“完成 20 题”提示  
+}
+
+document.addEventListener("DOMContentLoaded", () => {    
+  if (questions.length > 0) {      
+    renderQuestion();    
+  } else {      
+    questionTextDiv.textContent = "题目加载失败，请稍后刷新再试。";    
+  }  
+});
+
  </script>
 
 </body>
