@@ -28,6 +28,67 @@
         margin-top: 60px;
       }
     }
+.result-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.result-subtitle {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.8;
+}
+
+.result-section {
+  margin-top: 24px;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.result-section h2 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.result-section ul,
+.result-section ol {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.result-cta {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(0,0,0,0.08);
+}
+
+.result-cta-text {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.result-buttons {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-main,
+.btn-ghost {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #f3b39b;
+  background: #fbe4d7;
+  white-space: nowrap;
+}
+
+.btn-ghost {
+  background: #fff;
+}
 
     .card {
       background: #ffffff;
@@ -326,14 +387,70 @@
           这一版只是一个「性格练习题」，还不会给出具体的 MBTI 类型结果。<br />
           真正有价值的部分，是你刚刚在每一道题里，对自己做的那些小小观察。
         </p>
-        <div class="result-cta">
-          你可以：<br />
-          · 把哪些题你选得特别快、特别坚定圈出来，看看里面藏着什么模式；<br />
-          · 把犹豫了很久的题记下来，找个安静时间慢慢写写：<span>「我为什么会纠结？」</span><br />
-          这份小测试，更像是一个「和自己聊一聊」的开场白。完整版测评和结果页面，我们之后再一起打磨。
-        </div>
-      </div>
+       <!-- 完成提示 / 结果区 -->
+<div id="resultCard" class="result-card" style="display:none;">
+  <div class="result-title">你已经认真完成了 200 道题 🎉</div>
+  <p class="result-subtitle">
+    这 200 道题，不是别人给你的「性格判决书」，而是你亲手写的一份性格备忘录。
+  </p>
+
+  <div class="result-section">
+    <h2>接下来，可以这样用这份测试</h2>
+    <ul>
+      <li>
+        <strong>回看你犹豫过的问题：</strong>
+        哪些题目你想了很久、点了又改？那往往是你内心最有矛盾、最值得多看一眼的地方。
+      </li>
+      <li>
+        <strong>把相似的问题归到一起：</strong>
+        比如「人际关系类 / 情绪能量类 / 行动力度类 / 计划与执行类」，
+        看看自己在哪一块最稳定，哪一块经常摇摆。
+      </li>
+      <li>
+        <strong>不要急着给自己贴标签：</strong>
+        这只是「此刻的你」的一张截图，不是你这辈子的全部样子。
+      </li>
+    </ul>
+  </div>
+
+  <div class="result-section">
+    <h2>稍微读一读现在的自己</h2>
+    <p>
+      如果你在很多题里都选了「顺其自然 / 先缓一缓 / 看情况再说」，  
+      说明你现在可能更需要安全感和空间，先把自己照顾好是完全合理的。
+    </p>
+    <p>
+      如果你更常选择「马上行动 / 主动推进 / 往前走再调整」，  
+      说明你有很强的推动力，只是也要记得给自己留一点休息和复盘的余地。
+    </p>
+    <p>
+      如果你发现自己在一些题目上左右摇摆，有时冲、有时退，  
+      那可能正是你正在「长大」的地方——旧模式和新想法还在慢慢磨合。
+    </p>
+    <p>
+      无论是哪一种，都不代表你「好」或「不好」，  
+      只是你现在真实的样子，而真实本身就很值得被看见。
+    </p>
+  </div>
+
+  <div class="result-cta">
+    <p class="result-cta-text">如果想再多走一步，可以试试这个小练习：</p>
+    <ol>
+      <li>写下 3 道让你印象最深的问题和当时的答案。</li>
+      <li>
+        在每一道下面补一句：<strong>「如果一年后我再来答这一题，我希望自己的答案是什么？」</strong>
+      </li>
+      <li>从这 3 题里选出你最在意的 1 题，给自己一个「这周就能做到」的小行动。</li>
+    </ol>
+
+    <div class="result-buttons">
+      <button id="retryBtn" class="btn-main">从第 1 题重新做一次</button>
+      <!-- 下面这个链接你可以以后换成你自己的小红书 / 主页 -->
+      <a href="#" class="btn-ghost">先收藏页面，过段时间再做一遍</a>
     </div>
+  </div>
+</div>
+
 
     <div class="footer">
       © 2025 <strong>和 Sam 一起升级大脑 · MBTI 小测试（体验版）</strong><br />
@@ -2291,7 +2408,32 @@ document.addEventListener("DOMContentLoaded", () => {
   } else if (questionTextDiv) {
     questionTextDiv.textContent = "题库加载失败，请稍后刷新。";
   }
-});
+ // 8. 重新做一次按钮（在结果页）
+const retryBtn = document.getElementById("retryBtn");
+if (retryBtn) {
+  retryBtn.addEventListener("click", () => {
+    // 清空答案
+    for (let i = 0; i < answers.length; i++) {
+      answers[i] = null;
+    }
+    currentIndex = 0;
+
+    // 切回题目模式
+    if (questionMeta)      questionMeta.style.display = "block";
+    if (questionTextBlock) questionTextBlock.style.display = "block";
+    if (optionsContainer)  optionsContainer.style.display = "block";
+    if (navButtons)        navButtons.style.display = "flex";
+    if (tipsText)          tipsText.style.display = "block";
+    if (resultCard)        resultCard.style.display = "none";
+
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+// 9. 页面加载时，直接显示第 1 题
+renderQuestion();
+
+
 </script>
 
 
