@@ -298,7 +298,8 @@
 
       <!-- 标题 -->
       <h1 class="quiz-title">
-       这<span id="qTotalTitle"> 200</span> 道题，先帮你看清自己的性格倾向</h1>
+       这<span id="qTotalTitle"> 200</span> 道题，先帮你看清自己的性格倾向
+      </h1>
       <p class="quiz-subtitle">PERSONALITY CHECK · RELATIONSHIP WITH YOURSELF</p>
       <p class="intro-text">
         本小测试灵感来自 MBTI 理论，用于「自我认识练习」。<br />
@@ -2172,10 +2173,14 @@ const tipsText = document.querySelector(".tip-text");
 const prevBtn = document.getElementById("prevBtn");  // 添加这个定义
 const resultCard = document.getElementById("resultCard");  // 添加这个定义
 const qTotalSpan = document.getElementById("qTotal"); // 添加这个定义
+const qTotalTitleSpan   = document.getElementById("qTotalTitle");     // 标题里的“这 XX 道题”
 
-let currentIndex = 0;  
+let currentIndex = 0;
 const answers = new Array(questions.length).fill(null);
-qTotalSpan.textContent = questions.length;
+
+qTotalSpan.textContent      = questions.length; // 进度条里的“共 XX 题”
+qTotalTitleSpan.textContent = questions.length; // 标题里的“这 XX 道题”
+
 
 function renderQuestion() {    
   const q = questions[currentIndex];    
