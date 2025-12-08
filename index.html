@@ -2287,100 +2287,92 @@ const questions = [
 
 
 <script>
-// ===== 题目控制逻辑：显示题目 / 记录答案 / 上一题 =====
+// ===== 题目控制逻辑：显示题目 / 记录答案 / 上一题 / 重新作答 =====
 
-// 1. 抓取页面里的元素
-const qIndexSpan        = document.getElementById("qIndex");          // 进度条里的“第 xx 题”
-const questionNumberSpan= document.getElementById("questionNumber");  // 问题区里的“第 xx 题”
-const questionTextDiv   = document.getElementById("questionText");    // 问题文字
-const optionsContainer  = document.getElementById("optionsContainer");// 选项容器
+// 1. 抓取页面上的元素
+const qIndexSpan          = document.getElementById("qIndex");           // 顶部进度里的“第 X 题”
+const questionNumberSpan  = document.getElementById("questionNumber");   // 问题区里的“第 X 题”
+const questionTextDiv     = document.getElementById("questionText");     // 题目文字
+const optionsContainer    = document.getElementById("optionsContainer"); // 选项容器
+const navButtons          = document.querySelector(".nav-buttons");      // “上一题”按钮外层
+const tipsText            = document.querySelector(".tip-text");         // 小提示
+const prevBtn             = document.getElementById("prevBtn");          // 上一题按钮
+const questionMeta        = document.querySelector(".question-meta");    // “第 X 题 / 共 XX 题”整行
+const resultCard          = document.getElementById("resultCard");       // 结果卡片
 
-const navButtons        = document.querySelector(".nav-buttons");     // “上一题”按钮所在区域
-const tipsText          = document.querySelector(".tip-text");        // 小提示文字
-const prevBtn           = document.getElementById("prevBtn");         // 上一题按钮
-const questionMeta      = document.querySelector(".question-meta");   // “第 x 题 / 共 x 题”这行
+// 这两个 span 里显示总题数
+const qTotalSpan          = document.getElementById("qTotal");           // “共 XX 题”
+const qTotalTitleSpan     = document.getElementById("qTotalTitle");      // 标题上的“这 XX 道题”
 
-const resultCard        = document.getElementById("resultCard");      // 结果卡片
-const qTotalSpan        = document.getElementById("qTotal");          // “共 xx 题”（问题区）
-const qTotalTitleSpan   = document.getElementById("qTotalTitle");     // 标题里的“这 xx 道题”
+// 结果页里的“重新做一次”按钮
+const retryBtn            = document.getElementById("retryBtn");
 
-// 2. 当前题目下标 & 答案数组
-let currentIndex = 0;
-// 跟题目数量一样长的数组，每道题的答案下标存在这里
+// 2. 当前题目索引 + 答案数组
+let currentIndex = 0;                                // 从第 0 题开始（显示时 +1）
 const answers = new Array(questions.length).fill(null);
 
-// 3. 设置总题数（两个地方都统一）
-qTotalSpan.textContent      = questions.length;
-qTotalTitleSpan.textContent = questions.length;
+// 3. 把总题目数写到页面上（自动变成 200，而不是写死）
+if (qTotalSpan)      qTotalSpan.textContent      = questions.length;
+if (qTotalTitleSpan) qTotalTitleSpan.textContent = questions.length;
 
-// 4. 渲染当前这一题
+// 4. 渲染当前题目
 function renderQuestion() {
   const q = questions[currentIndex];
-
-  // 如果数据出了问题，给个提示，避免整页空白
-  if (!q) {
-    if (questionTextDiv) {
-      questionTextDiv.textContent = "题目数据有点小问题，稍后刷新再试试看。";
-    }
-    return;
-  }
-
   const showIndex = currentIndex + 1;
 
-  // 更新“第 x 题”
-  if (qIndexSpan)        qIndexSpan.textContent        = showIndex;
-  if (questionNumberSpan)questionNumberSpan.textContent = showIndex;
+  if (qIndexSpan)         qIndexSpan.textContent         = showIndex;
+  if (questionNumberSpan) questionNumberSpan.textContent = showIndex;
+  if (questionTextDiv)    questionTextDiv.textContent    = q.text;
 
-  // 更新题干
-  if (questionTextDiv) questionTextDiv.textContent = q.text;
+  if (!optionsContainer) return;
 
   // 清空旧选项
-  if (optionsContainer) {
-    optionsContainer.innerHTML = "";
+  optionsContainer.innerHTML = "";
 
-    // 生成新选项
-    q.options.forEach((optText, idx) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "option";
+  // 根据当前题目的 options 动态生成按钮
+  q.options.forEach((optText, idx) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option";
 
-      const label = String.fromCharCode(65 + idx); // A/B/C/D...
-      btn.textContent = label + "  " + optText;
+    const label = String.fromCharCode(65 + idx); // 65 = 'A'
+    btn.textContent = label + "  " + optText;
 
-      // 如果这题之前点过，保留高亮
-      if (answers[currentIndex] === idx) {
-        btn.classList.add("option-selected");
+    // 如果这一题之前已经选过，就高亮
+    if (answers[currentIndex] === idx) {
+      btn.classList.add("option-selected");
+    }
+
+    // 点击选项：记录答案 + 跳到下一题 / 显示结果
+    btn.addEventListener("click", () => {
+      answers[currentIndex] = idx;
+
+      if (currentIndex < questions.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        showResult();
       }
-
-      // 点击选项：记录答案 & 自动跳下一题 / 显示结果
-      btn.addEventListener("click", () => {
-        answers[currentIndex] = idx;
-
-        if (currentIndex < questions.length - 1) {
-          currentIndex++;
-          renderQuestion();
-        } else {
-          showResult();
-        }
-      });
-
-      optionsContainer.appendChild(btn);
     });
+
+    optionsContainer.appendChild(btn);
+  });
+
+  // 第 1 题时，“上一题”禁用
+  if (prevBtn) {
+    prevBtn.disabled = currentIndex === 0;
   }
 
-  // 上一题按钮是否可用
-  if (prevBtn)    prevBtn.disabled = currentIndex === 0;
-
-  // 显示 / 隐藏不同区域
-  if (questionMeta)      questionMeta.style.display      = "block";
-  if (questionTextDiv)   questionTextDiv.style.display   = "block";
-  if (optionsContainer)  optionsContainer.style.display  = "block";
-  if (navButtons)        navButtons.style.display        = "flex";
-  if (tipsText)          tipsText.style.display          = "block";
-  if (resultCard)        resultCard.style.display        = "none";
+  // 显示题目区，隐藏结果区
+  if (questionMeta)     questionMeta.style.display     = "block";
+  if (questionTextDiv)  questionTextDiv.style.display  = "block";
+  if (optionsContainer) optionsContainer.style.display = "block";
+  if (navButtons)       navButtons.style.display       = "flex";
+  if (tipsText)         tipsText.style.display         = "block";
+  if (resultCard)       resultCard.style.display       = "none";
 }
 
-// 5. 上一题按钮
+// 5. “上一题”按钮
 if (prevBtn) {
   prevBtn.addEventListener("click", () => {
     if (currentIndex > 0) {
@@ -2390,50 +2382,47 @@ if (prevBtn) {
   });
 }
 
-// 6. 完成所有题目后的简单结果显示（先占位）
+// 6. 显示结果页（之后我们再慢慢丰富文案）
 function showResult() {
-  if (questionMeta)      questionMeta.style.display      = "none";
-  if (questionTextDiv)   questionTextDiv.style.display   = "none";
-  if (optionsContainer)  optionsContainer.style.display  = "none";
-  if (navButtons)        navButtons.style.display        = "none";
-  if (tipsText)          tipsText.style.display          = "none";
-  if (resultCard)        resultCard.style.display        = "block";
-  // 以后这里可以接“结果分析页面”的逻辑
+  if (questionMeta)     questionMeta.style.display     = "none";
+  if (questionTextDiv)  questionTextDiv.style.display  = "none";
+  if (optionsContainer) optionsContainer.style.display = "none";
+  if (navButtons)       navButtons.style.display       = "none";
+  if (tipsText)         tipsText.style.display         = "none";
+  if (resultCard)       resultCard.style.display       = "block";
 }
 
-// 7. 页面加载完成以后，再去渲染第 1 题
-document.addEventListener("DOMContentLoaded", () => {
-  if (Array.isArray(questions) && questions.length > 0) {
-    renderQuestion();
-  } else if (questionTextDiv) {
-    questionTextDiv.textContent = "题库加载失败，请稍后刷新。";
-  }
- // 8. 重新做一次按钮（在结果页）
-const retryBtn = document.getElementById("retryBtn");
+// 7. 结果页里的「从第 1 题重新做一次」
 if (retryBtn) {
   retryBtn.addEventListener("click", () => {
-    // 清空答案
+    // 清空所有答案
     for (let i = 0; i < answers.length; i++) {
       answers[i] = null;
     }
     currentIndex = 0;
 
-    // 切回题目模式
-    if (questionMeta)      questionMeta.style.display = "block";
-    if (questionTextBlock) questionTextBlock.style.display = "block";
-    if (optionsContainer)  optionsContainer.style.display = "block";
-    if (navButtons)        navButtons.style.display = "flex";
-    if (tipsText)          tipsText.style.display = "block";
-    if (resultCard)        resultCard.style.display = "none";
+    // 回到题目模式
+    if (questionMeta)     questionMeta.style.display     = "block";
+    if (questionTextDiv)  questionTextDiv.style.display  = "block";
+    if (optionsContainer) optionsContainer.style.display = "block";
+    if (navButtons)       navButtons.style.display       = "flex";
+    if (tipsText)         tipsText.style.display         = "block";
+    if (resultCard)       resultCard.style.display       = "none";
 
     renderQuestion();
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
-// 9. 页面加载时，直接显示第 1 题
-renderQuestion();
 
-
+// 8. 页面加载完成后，渲染第 1 题
+document.addEventListener("DOMContentLoaded", () => {
+  if (questions && questions.length > 0) {
+    renderQuestion();
+  } else if (questionTextDiv) {
+    questionTextDiv.textContent = "题目加载失败，请稍后刷新再试。";
+  }
+});
 </script>
+
 
 
