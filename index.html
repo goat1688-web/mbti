@@ -297,7 +297,8 @@
       <div id="progress" class="progress-text">第 <span id="qIndex">1</span> / <span id="qTotal">20</span> 题</div>
 
       <!-- 标题 -->
-      <h1 class="quiz-title">这 20 道题，先帮你看清自己的性格倾向</h1>
+      <h1 class="quiz-title">
+       这<span id="qTotalTitle">200</span> 道题，先帮你看清自己的性格倾向</h1>
       <p class="quiz-subtitle">PERSONALITY CHECK · RELATIONSHIP WITH YOURSELF</p>
       <p class="intro-text">
         本小测试灵感来自 MBTI 理论，用于「自我认识练习」。<br />
@@ -2163,8 +2164,8 @@ const questions = [
   // =========================
 
   const qIndexSpan = document.getElementById("qIndex");  
-const questionNumberSpan = document.getElementById("questionNumber");  // 添加这个定义
-const questionTextDiv = document.querySelector(".question-text");  // 添加这个定义
+const questionNumberSpan = document.getElementById("questionNumber");  // 200
+const questionTextDiv = document.querySelector(".question-text");  // 200
 const optionsContainer = document.getElementById("optionsContainer");  // 添加这个定义
 const navButtons = document.querySelector(".nav-buttons");  
 const tipsText = document.querySelector(".tip-text");
