@@ -2162,7 +2162,7 @@ const questions = [
 
   // =========================
   // 以下是控制逻辑：显示题目 / 记录答案 / 上一题
-  // =========================
+  
 
   const qIndexSpan = document.getElementById("qIndex");  
 const questionNumberSpan = document.getElementById("questionNumber");  // 200
@@ -2174,12 +2174,15 @@ const prevBtn = document.getElementById("prevBtn");  // 添加这个定义
 const resultCard = document.getElementById("resultCard");  // 添加这个定义
 const qTotalSpan = document.getElementById("qTotal"); // 添加这个定义
 const qTotalTitleSpan   = document.getElementById("qTotalTitle");     // 标题里的“这 XX 道题”
+const questionTotalSpan = document.getElementById("questionTotal"); // “共 XX 题”里那个
 
 let currentIndex = 0;
 const answers = new Array(questions.length).fill(null);
 
-qTotalSpan.textContent      = questions.length; // 进度条里的“共 XX 题”
-qTotalTitleSpan.textContent = questions.length; // 标题里的“这 XX 道题”
+qTotalSpan.textContent = questions.length;          // 顶部小字里的“共 XX 题”
+questionTotalSpan.textContent = questions.length;   // 问题行里的“共 XX 题”
+qTotalTitleSpan.textContent = questions.length;     // 标题里的“这 XX 道题”
+
 
 
 function renderQuestion() {    
@@ -2238,7 +2241,7 @@ function showResult() {
   navButtons.style.display = "none";    
   tipsText.style.display = "none";    
   resultCard.style.display = "block";    
-  // 这里暂时只是练习版的“完成 20 题”提示  
+  
 }
 
 document.addEventListener("DOMContentLoaded", () => {    
