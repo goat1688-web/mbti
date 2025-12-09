@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>和 Sam 一起升级大脑 · 性格小结果页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft Yahei", sans-serif;
+      background: radial-gradient(circle at top, #ffe9da 0, #fff7f0 40%, #ffffff 100%);
+      color: #3a2b28;
+      line-height: 1.7;
+      padding: 24px 12px 40px;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.06);
+      padding: 28px 22px 32px;
+    }
+
+    @media (min-width: 720px) {
+      .page {
+        padding: 32px 40px 40px;
+      }
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffe4d4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .brand-name {
+      font-size: 15px;
+      color: #a67b5b;
+      letter-spacing: 0.08em;
+    }
+
+    .sub-note {
+      font-size: 11px;
+      color: #b7a49a;
+      margin-bottom: 18px;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 720px) {
+      .hero {
+        flex-direction: row;
+        align-items: center;
+        gap: 28px;
+      }
+    }
+
+    .hero-image {
+      flex: 0 0 220px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      max-width: 220px;
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+      background: #fff6ef;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+    }
+
+    .hero-main {
+      flex: 1;
+    }
+
+    .type-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      color: #b0723d;
+      background: #fff3e5;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #342320;
+    }
+
+    .title-en {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c3a99a;
+      margin-bottom: 10px;
+    }
+
+    .hero-one-line {
+      font-size: 14px;
+      color: #85655a;
+    }
+
+    .section {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px dashed #f0dfd4;
+    }
+
+    .section:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 6px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #3a2420;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-title span.badge {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: #fff1e2;
+      color: #c07b3e;
+    }
+
+    .section p {
+      font-size: 14px;
+      color: #5c433b;
+      margin-bottom: 6px;
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    .chip {
+      font-size: 12px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #fff5eb;
+      color: #b0713e;
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px 32px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 720px) {
+      .two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .bullet-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: #3d2621;
+    }
+
+    .bullet-list {
+      padding-left: 1em;
+      font-size: 14px;
+      color: #5c433b;
+    }
+
+    .bullet-list li {
+      margin-bottom: 4px;
+    }
+
+    .rating-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #5a4038;
+    }
+
+    .rating-tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #fff4e2;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      font-size: 12px;
+      color: #b19b92;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <!-- 顶部品牌 -->
+    <header class="brand">
+      <div class="brand-logo">🧠</div>
+      <div class="brand-name">和 Sam 一起升级大脑 · 性格小结果页</div>
+    </header>
+    <div class="sub-note">本页为个人自我探索练习，灵感参考 MBTI 理论，但与官方测试及 Myers-Briggs Company 无关。</div>
+
+    <!-- 形象 + 标题区 -->
+    <section class="hero">
+      <div class="hero-image">
+        <!-- 这里换成你上传到 GitHub 的那张图片文件名 -->
+        <img src="type-soft-realist.png" alt="温柔现实主义者的卡通形象" />
+      </div>
+
+      <div class="hero-main">
+        <div class="type-tag">示例类型 · 温柔现实主义者</div>
+        <h1 class="title">温柔现实主义者</h1>
+        <div class="title-en">SOFT-HEARTED REALIST</div>
+        <p class="hero-one-line">
+          外表温柔随和，内心有自己的秩序感和生存嗅觉——喜欢照顾别人，也懂得先照顾好自己。
+        </p>
+      </div>
+    </section>
+
+    <!-- 整体印象 -->
+    <section class="section">
+      <h2 class="section-title">1. 整体印象 <span class="badge">你给人的第一感觉</span></h2>
+      <p>
+        跟你相处久一点，别人会发现你是一个很“真实、好相处”的人：不会刻意制造气氛，也不爱高调张扬，
+        更像是那个在角落里默默把事情打理好的人。你对自己的感受很敏感，也很尊重别人的感受，
+        不喜欢给别人添麻烦，但在关键时刻又挺务实、挺能扛。
+      </p>
+      <p>
+        你往往不太抢风头，却能成为小范围里的“安定感来源”：你在就觉得心里踏实一点。
+      </p>
+      <div class="chips">
+        <span class="chip">温柔不聒噪</span>
+        <span class="chip">感受力细腻</span>
+        <span class="chip">现实又不冷酷</span>
+        <span class="chip">重情重义</span>
+      </div>
+    </section>
+
+    <!-- 关键词 -->
+    <section class="section">
+      <h2 class="section-title">2. 性格关键词</h2>
+      <div class="chips">
+        <span class="chip">敏感而不脆弱</span>
+        <span class="chip">有点慢热</span>
+        <span class="chip">讨厌麻烦别人</span>
+        <span class="chip">重视当下体验</span>
+        <span class="chip">容易心软</span>
+        <span class="chip">需要安全感</span>
+      </div>
+    </section>
+
+    <!-- 优势 / 短板 -->
+    <section class="section">
+      <h2 class="section-title">3. 你的亮点 & 盲区</h2>
+      <div class="two-cols">
+        <div>
+          <div class="bullet-title">你的优势</div>
+          <ul class="bullet-list">
+            <li>很会“照顾气氛”：能察觉到别人的情绪变化，懂得给空间、给安慰或悄悄转移话题。</li>
+            <li>脚踏实地，心里有数：做事前会盘一盘现实条件，不轻易冲动下决定。</li>
+            <li>在熟人面前很温柔：会记得别人说过的小细节，用小事情表达在意和关心。</li>
+            <li>不喜欢夸大自己，也很少拖累别人，属于团队里“低噪音、高可靠”的存在。</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="bullet-title">容易踩的坑（短板）</div>
+          <ul class="bullet-list">
+            <li>不太会说“不”：怕破坏关系，明明很为难也会答应，最后自己压力很大。</li>
+            <li>习惯自己消化情绪：不想麻烦别人，结果容易闷在心里、越想越乱。</li>
+            <li>对冲突很敏感：一旦发生争执，会下意识想回避，错过表达真实想法的机会。</li>
+            <li>有时过于随遇而安：把“顺其自然”和“放弃主动权”混在一起，耽误了对自己更好的选择。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 人际关系 -->
+    <section class="section">
+      <h2 class="section-title">4. 你在人际关系里的样子</h2>
+      <p>
+        在关系里，你是非常重视“氛围”和“彼此感受”的那一类人。你不会第一时间用道理说服别人，
+        而是先感受对方现在的状态、需要什么样的陪伴。你愿意倾听、不太评判，
+        也习惯用行动代替很多华丽的表达。
+      </p>
+      <p>
+        对亲近的人，你有点黏人、又有点怕打扰；你很需要确认“被在意”，但嘴上又容易说“没事，你忙你的就好”。
+      </p>
+    </section>
+
+    <!-- 金钱观 & 工作 -->
+    <section class="section">
+      <h2 class="section-title">5. 金钱观 & 工作风格</h2>
+      <p>
+        你对钱的态度整体偏“务实但不拜金”：钱带给你的不是炫耀，而是松一口气的安全感。
+        你不太喜欢高风险博弈，更愿意通过稳定的积累，让生活慢慢变得宽裕一点。
+      </p>
+      <p>
+        在工作中，你适合做“靠谱执行者 + 细腻体验设计者”这一类角色：愿意把事情做细、做稳，
+        也在意使用者 / 客户 / 身边人的真实感受。过度僵硬的制度、过强的控制欲，会让你觉得很窒息。
+      </p>
+    </section>
+
+    <!-- 团队 / 家庭角色 -->
+    <section class="section">
+      <h2 class="section-title">6. 团队里的你 & 家庭里的你</h2>
+      <div class="two-cols">
+        <div>
+          <div class="bullet-title">在团队中</div>
+          <ul class="bullet-list">
+            <li>更像“安静的粘合剂”：不抢镜头，却能让合作关系更顺滑。</li>
+            <li>喜欢清晰、体面、有人情味的协作方式，对冷冰冰的命令式沟通比较反感。</li>
+            <li>如果被长期忽视或不被尊重，你不会大吵大闹，但会慢慢抽离。</li>
+          </ul>
+        </div>
+        <div>
+          <div class="bullet-title">在家庭中</div>
+          <ul class="bullet-list">
+            <li>愿意付出、愿意照顾细节，很容易成为“情绪稳定器”。</li>
+            <li>你渴望被理解、被看见自己的努力，如果只有付出没有被回应，会悄悄很受伤。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 艺术 / 运动 / 浪漫 -->
+    <section class="section">
+      <h2 class="section-title">7. 艺术感、运动感 & 浪漫指数</h2>
+      <p>
+        你对“好看、好听、好体验”的东西有天然的敏感度：不一定追求专业，但追求舒服、自然、有小巧思。
+        比起竞技式的输赢，你更享受过程里的投入感，喜欢安静一点、有节奏感的活动。
+      </p>
+      <div class="rating-row">
+        <span class="rating-tag">🎨 艺术感：中上 — 对美有感觉，表达上偏含蓄</span>
+        <span class="rating-tag">🏃 运动感：看兴趣，不爱被逼着练</span>
+        <span class="rating-tag">💌 浪漫指数：高，但更偏“照顾型”的温柔浪漫</span>
+      </div>
+    </section>
+
+    <!-- 建议 -->
+    <section class="section">
+      <h2 class="section-title">8. 给你的温柔提醒</h2>
+      <p>
+        你已经很会照顾别人了，接下来可以多练习一点：在重要的时候，也勇敢地照顾“自己的需要”。
+        适当地说“不”、适当地表达不满，并不会让你变坏，反而会让关系更真实、更长久。
+      </p>
+      <p>
+        当你一边保留自己的温柔，一边学会为自己争取位置，你的温柔就不再是“谁都可以来消耗”的好人，
+        而是带着力量、很有边界感的善良。
+      </p>
+    </section>
+
+    <div class="footer-note">
+      和 Sam 一起升级大脑 · 这只是一个起点，真正的答案，永远在你自己身上。
+    </div>
+  </main>
+</body>
+</html>
