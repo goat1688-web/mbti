@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>你的性格倾向：ESFP | 和 Sam 一起升级大脑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --accent: #ea7b2c;        /* ESFP 主色：明亮橙杏色 */
+      --accent-soft: #fff3e4;   /* 浅橙背景 */
+      --text-main: #3b2617;
+      --text-light: #72533b;
+      --border-soft: #f2c59b;
+      --tag-bg: #fff8d8;
+      --tag-text: #b18300;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #fff5eb 0, #fff1e4 40%, #fdf6f1 100%);
+      color: var(--text-main);
+    }
+
+    .page {
+      max-width: 880px;
+      margin: 32px auto 40px;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(173, 92, 34, 0.13);
+      padding: 32px 24px 32px;
+      border: 1px solid rgba(242, 197, 155, 0.9);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 40px 40px 36px;
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe3b8 0, #ffc48a 40%, #ff9b54 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .brand-logo span { font-size: 18px; }
+
+    .brand-name {
+      font-weight: 600;
+      color: #5c3a23;
+    }
+
+    .badge-type {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border-soft);
+    }
+
+    .top-meta {
+      font-size: 12px;
+      color: #a0744e;
+      margin-bottom: 4px;
+    }
+
+    .title-block {
+      margin-bottom: 24px;
+    }
+
+    .title-block h1 {
+      font-size: 26px;
+      margin: 4px 0 8px;
+      color: var(--accent);
+    }
+
+    .title-block .subtitle {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .title-block .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+    }
+
+    .title-block .tagline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--tag-text);
+    }
+
+    .hero-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .hero-text {
+      flex: 1 1 260px;
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .hero-text blockquote {
+      margin: 0 0 8px;
+      padding-left: 10px;
+      border-left: 3px solid var(--accent);
+      font-size: 14px;
+      color: #5b3a24;
+    }
+
+    .hero-illu {
+      flex: 0 0 150px;
+      text-align: right;
+    }
+
+    .hero-illu img {
+      max-width: 150px;
+      border-radius: 18px;
+      background: var(--accent-soft);
+      padding: 10px;
+      border: 1px solid var(--border-soft);
+    }
+
+    @media (max-width: 640px) {
+      .hero-illu { text-align: left; }
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 28px 0 10px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    h2 span.idx {
+      font-size: 14px;
+      color: #e09b5c;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin: 18px 0 8px;
+      color: #7d4321;
+    }
+
+    p {
+      margin: 6px 0;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    ul {
+      margin: 4px 0 10px 18px;
+      padding-left: 0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    li { margin: 2px 0; }
+
+    .keyword-line {
+      margin: 10px 0 0;
+      font-size: 13px;
+      color: #6a4427;
+    }
+
+    .keyword-line span {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .pill-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: #7d4321;
+    }
+
+    .section-hint {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .divider {
+      margin: 28px 0 18px;
+      border-top: 1px dashed #f1c9a3;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid #f1c9a3;
+      font-size: 13px;
+      color: #5b3821;
+    }
+
+    .footer-note em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .footer-sign {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #8a5a3a;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="header">
+        <div class="brand">
+          <div class="brand-logo"><span>🧠</span></div>
+          <div>
+            <div class="brand-name">和 Sam 一起升级大脑 · 性格小测试（体验版）</div>
+            <div class="top-meta">本结果为个人认知探索工具，灵感参考 MBTI 理论，但与 MBTI® 官方测评及 Myers-Briggs Company 无关。</div>
+          </div>
+        </div>
+        <div class="badge-type">ESFP · 氛围制造者</div>
+      </div>
+
+      <div class="title-block">
+        <div class="subtitle">你的性格倾向：ESFP</div>
+        <h1>让生活不那么无聊的人</h1>
+        <div class="tagline">
+          <span class="tagline-dot"></span>
+          现场感高手 · 把日常过出一点烟火气
+        </div>
+      </div>
+
+      <div class="hero-row">
+        <div class="hero-text">
+          <blockquote>
+            别人还在犹豫要不要来，你已经把歌单放好、氛围灯打开了。
+          </blockquote>
+          <p>这份结果只是从「性格偏好」的角度，帮你看见自己那份很「活」的生命力。真正的你，不只是「爱玩」，而是有能力在很多灰蒙蒙的时刻，点亮一点情绪和温度的人。</p>
+        </div>
+        <div class="hero-illu">
+          <!-- 这里换成你之后给 ESFP 画的小人形象 -->
+          <img src="img/esfp-avatar.png" alt="ESFP 卡通形象（占位图，可替换）" />
+        </div>
+      </div>
+
+      <p class="keyword-line">
+        <span>社交氛围王</span>
+        <span>现场感强</span>
+        <span>情绪感染力</span>
+        <span>敢玩敢试</span>
+        <span>不喜欢被框死</span>
+      </p>
+
+      <!-- 一、总体画像 -->
+      <h2><span class="idx">01</span>一、总体画像：你是一个怎样的人？</h2>
+      <p>很多人只是活在脑子里，而你是真正活在「现场」的人。</p>
+      <p>你会用眼睛、耳朵、皮肤去感受这个世界：</p>
+      <ul>
+        <li>看到好看的光线，想拍照；</li>
+        <li>听到喜欢的歌，想跟着摇几下；</li>
+        <li>闻到街边的小吃味道，会想「先吃一口再说」。</li>
+      </ul>
+      <p>你把「好玩」「好看」「好吃」「舒服」当成很重要的指标，这不是不务正业，而是你真的在认真体验活着这件事。</p>
+
+      <h3>1.1 你给别人的第一印象</h3>
+      <p><span class="pill-title">初次见面时：</span></p>
+      <ul>
+        <li>很好相处，没什么距离感；</li>
+        <li>很会接梗、很容易聊起来，不容易冷场；</li>
+        <li>自然带动气氛，让场子没那么尴尬。</li>
+      </ul>
+      <p><span class="pill-title">熟悉之后：</span></p>
+      <ul>
+        <li>大家会发现你其实挺细腻：你能记得谁不吃什么、谁最近不太开心；</li>
+        <li>你看起来随性，其实对自己在乎的人挺上心；</li>
+        <li>你不是只会玩，你会为了喜欢的人和事认真投入。</li>
+      </ul>
+
+      <h3>1.2 你是怎么做决定的？</h3>
+      <p>你很依赖真实感受，而不是空想：</p>
+      <ul>
+        <li>你会问自己：「我现在想做什么？」</li>
+        <li>你会注意现场氛围、身体状态、对方反应；</li>
+        <li>觉得合适就上，不合适就直接撤，不太喜欢拖拖拉拉。</li>
+      </ul>
+      <p>在很多过度犹豫的人眼里，你可能显得「冲动」，但现实是：你更擅长在行动中修正，而不是在原地反复演习。</p>
+
+      <div class="divider"></div>
+
+      <!-- 二、优势 -->
+      <h2><span class="idx">02</span>二、你的优势：别人羡慕却学不来的「活」</h2>
+      <p class="section-hint">这些优势很「你」，但因为太自然，你可能不觉得那是能力。</p>
+
+      <h3>✅ 2.1 氛围和情绪的带动能力</h3>
+      <p>你对「气氛好不好」非常敏感：</p>
+      <ul>
+        <li>你知道什么时候该讲笑话，什么时候该认真一点；</li>
+        <li>你会主动接话、帮别人圆场，不让某个人太尴尬；</li>
+        <li>你很容易把一个冷冷清清的场子，变得松弛一点、好玩一点。</li>
+      </ul>
+
+      <h3>✅ 2.2 强烈的感官审美 & 体验感</h3>
+      <p>你天生对「好看好听好玩」有直觉：</p>
+      <ul>
+        <li>你会选景、选滤镜、选音乐；</li>
+        <li>你会搭配衣服、配饰、表情、姿态；</li>
+        <li>你知道什么样的细节，能让一个体验一下子变得高级或好玩。</li>
+      </ul>
+      <p>在内容时代，这种能力是很有变现可能的：短视频、直播、探店、体验分享、舞台表演……都需要你的这种「现场审美」。</p>
+
+      <h3>✅ 2.3 让人放松、卸下防备的气场</h3>
+      <p>很多人和你在一起会觉得：</p>
+      <ul>
+        <li>不用讲太多大道理，做自己就好；</li>
+        <li>你不会立刻评判别人，而是先跟着感受场景；</li>
+        <li>你有一种「来都来了，就好好玩一下」的感染力。</li>
+      </ul>
+
+      <h3>✅ 2.4 在变化中快速应对的能力</h3>
+      <p>当计划赶不上变化时，你反而比很多人适应得更快：</p>
+      <ul>
+        <li>你能现场调整安排，而不是僵住；</li>
+        <li>你能对突发状况做出灵活决定；</li>
+        <li>你不会被「必须按原计划走」绑死。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 三、短板 -->
+      <h2><span class="idx">03</span>三、你的短板：很会享受当下，但容易被「以后」反噬</h2>
+      <p class="section-hint">这些地方如果不留意，容易让你明明很有天赋，却总被现实泼冷水。</p>
+
+      <h3>⚠️ 3.1 不喜欢规划，容易被「以后再说」吃掉</h3>
+      <p>你不太喜欢被表格、长计划、时间轴绑住：</p>
+      <ul>
+        <li>遇到枯燥的规划任务，很容易拖延；</li>
+        <li>你更愿意今天先把心情弄好，明天再说努力的事；</li>
+        <li>久而久之「以后再说」累积成很多没做完的事。</li>
+      </ul>
+
+      <h3>⚠️ 3.2 避免面对沉重话题</h3>
+      <p>你不太喜欢气氛沉到谷底，所以对一些「很难」「很痛」的话题，可能会下意识绕开：</p>
+      <ul>
+        <li>不太想认真讨论「关系是不是该结束」；</li>
+        <li>不想细想「这份工作是不是早该换了」；</li>
+        <li>容易用玩笑、娱乐、忙碌来转移焦虑。</li>
+      </ul>
+
+      <h3>⚠️ 3.3 对「被限制」很敏感</h3>
+      <p>你可以努力，但不喜欢被管太死：</p>
+      <ul>
+        <li>规则太多，会让你想逃；</li>
+        <li>被过度控制，会让你故意反着来；</li>
+        <li>别人一旦用「你必须」「你不可以」的口吻，你会立刻起反感。</li>
+      </ul>
+
+      <h3>⚠️ 3.4 容易被误解为「不可靠」</h3>
+      <p>明明你在人情上很讲义气，但如果：</p>
+      <ul>
+        <li>经常迟到、改时间、临时变卦；</li>
+        <li>很多承诺只停留在当下的情绪高涨；</li>
+        <li>太多事情靠感觉在做，没留下记录和结果；</li>
+      </ul>
+      <p>别人就容易把你归类为「人挺好玩，但不适合托太重要的事」。</p>
+
+      <div class="divider"></div>
+
+      <!-- 四、能量 -->
+      <h2><span class="idx">04</span>四、能量条：什么让你觉得「活着真不错」，什么在悄悄耗尽你？</h2>
+
+      <h3>🔋 4.1 让你发光的东西</h3>
+      <ul>
+        <li>音乐、灯光、好吃的、好看的环境；</li>
+        <li>和一群能玩得来的朋友，一起做点有趣的事；</li>
+        <li>可以自己决定节奏，不被人一直催促、监管；</li>
+        <li>别人因为你说的某句话/做的某件小事心情变好，你会很有成就感。</li>
+      </ul>
+
+      <h3>🪫 4.2 在慢慢削弱你的东西</h3>
+      <ul>
+        <li>长期被困在枯燥、毫无变化的环境里；</li>
+        <li>你的热情总是被泼冷水：「太幼稚了吧」「别搞这些没用的」；</li>
+        <li>周围的人只会用道理压你，而很少有人真正陪你体验生活；</li>
+        <li>你明明在努力撑场面，却总是被当成「只会玩」。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 五、团队 -->
+      <h2><span class="idx">05</span>五、你在团队里的角色：气氛担当 + 体验设计师</h2>
+      <p>一个没有你的团队，可能很高效，但会少很多人味和乐趣。</p>
+
+      <h3>5.1 你自然会做的事</h3>
+      <ul>
+        <li>在大家都快睡着时，抛一个有趣的话题；</li>
+        <li>在重要活动前，帮大家选场地、选布置、选音乐；</li>
+        <li>在新人很紧张时，主动上前打招呼，帮他们融入环境。</li>
+      </ul>
+
+      <h3>5.2 你带来的价值</h3>
+      <ul>
+        <li>让枯燥的任务过程，变得没那么煎熬；</li>
+        <li>让团队里有真实的活力，而不是只有 KPI；</li>
+        <li>在面向用户/客户的场合，你很能感受到「对方此刻的感受」。</li>
+      </ul>
+
+      <h3>5.3 给你的提醒</h3>
+      <ul>
+        <li>适当地把「我能带来什么具体结果」说清楚，而不仅仅是「我很会带气氛」；</li>
+        <li>对重要的工作，留一点记录：做过什么、数据变化如何，让别人看得见你的成果；</li>
+        <li>不要总是承担「搞好气氛」的责任，那不是你一个人的义务。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 六、家庭 -->
+      <h2><span class="idx">06</span>六、你在家庭中的位置：那个让家里不那么沉闷的人</h2>
+      <p>在很多家庭里，你很容易变成：</p>
+      <ul>
+        <li>会逗大家笑的那一个；</li>
+        <li>主动提出「我们去哪里走走」「我们一起吃点好吃的」的人；</li>
+        <li>在气氛尴尬时，挺身出来转移话题的缓冲剂。</li>
+      </ul>
+
+      <h3>6.1 容易被忽略的部分</h3>
+      <ul>
+        <li>大家习惯了你「好像一直挺开心的」，很少问你真实状态；</li>
+        <li>你难过时，也会下意识用玩笑遮过去，不想让家里变得更沉重；</li>
+        <li>慢慢地，连你自己都很难分辨「我是真的还好，还是只是习惯性在演还好」。</li>
+      </ul>
+
+      <h3>6.2 写给你的提醒</h3>
+      <p>你可以继续做那个给家庭带来快乐的人，但也可以：</p>
+      <ul>
+        <li>偶尔认真地说：「我今天状态也不太好。」</li>
+        <li>允许自己在家里不是永远的搞笑担当，而是一个普通的家人；</li>
+        <li>给家人机会学会：如何在你不那么「好笑」的时候，仍然愿意陪着你。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 七、金钱观 -->
+      <h2><span class="idx">07</span>七、金钱观 &amp; 安全感</h2>
+      <p>一句话总结：你希望钱能换来体验和自由，而不是只有压力。</p>
+
+      <h3>7.1 你对钱的典型态度</h3>
+      <ul>
+        <li>愿意为好玩、好看、好吃的体验花钱——旅行、演唱会、聚会、课程；</li>
+        <li>不太喜欢被「一定要存到多少才有安全感」压得喘不过气；</li>
+        <li>你更容易记住「这笔钱给我带来了什么感觉」，而不是冰冷数字。</li>
+      </ul>
+
+      <h3>7.2 潜在的风险</h3>
+      <ul>
+        <li>情绪低落时，用消费来安慰自己：「就这一次，犒劳一下」；</li>
+        <li>账目不清楚，钱去了哪里全靠模糊印象；</li>
+        <li>在金钱话题上容易抗拒，觉得「想太多好烦」。</li>
+      </ul>
+
+      <h3>7.3 小建议</h3>
+      <ul>
+        <li>不需要变成理财达人，只要有一条「我不会动的底线储备」就已经很棒；</li>
+        <li>可以把一部分预算设为「体验基金」：专门用来买那些真的会留下好记忆的东西；</li>
+        <li>每个月只花几分钟，回顾「哪些钱花得很值得」「哪些只是情绪消费」，就已经是在升级你的金钱感知了。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 八、艺术 & 运动 -->
+      <h2><span class="idx">08</span>八、艺术感受力 &amp; 运动风格</h2>
+
+      <h3>8.1 艺术 / 审美感受</h3>
+      <ul>
+        <li>你对颜色、音乐、节奏、表情都很敏锐；</li>
+        <li>你能快速感受一首歌、一幕画面带来的情绪；</li>
+        <li>你常常会在日常生活里，忍不住「加一点戏」让画面更好看。</li>
+      </ul>
+      <p>如果把这些认真用起来，你在：</p>
+      <ul>
+        <li>表演、舞台、主持、舞蹈、配音、短视频创作；</li>
+        <li>探店、体验类自媒体、Vlog；</li>
+        <li>任何需要「活人现场感」的工作里，都有天赋优势。</li>
+      </ul>
+
+      <h3>8.2 运动风格</h3>
+      <p>你最容易爱上的运动，往往会有这些特点：</p>
+      <ul>
+        <li>有音乐、有节奏：舞蹈、尊巴、团课、操课；</li>
+        <li>有人一起玩：球类、小团体骑行、线下课程；</li>
+        <li>氛围轻松，不是纯拼命、纯比狠的那种。</li>
+      </ul>
+      <p>你不一定要「练到多专业」，只要能让你觉得「这段时间我真正在活着」，就够了。</p>
+
+      <div class="divider"></div>
+
+      <!-- 九、浪漫 & 亲密 -->
+      <h2><span class="idx">09</span>九、浪漫指数 &amp; 亲密关系</h2>
+      <p>总评：浪漫感很强，表达也很直接，但需要照顾好自己的界限。</p>
+
+      <h3>9.1 你心里理想的关系</h3>
+      <ul>
+        <li>可以一起玩、一起疯，也能在累的时候互相依靠；</li>
+        <li>对方愿意走进你的生活现场，而不是只在线上聊聊；</li>
+        <li>两个人可以一起去看世界，而不是关在同一个情绪循环里。</li>
+      </ul>
+
+      <h3>9.2 你在爱里的样子</h3>
+      <ul>
+        <li>你会很自然地带对方去体验很多有趣的事；</li>
+        <li>你会在约会细节里下功夫：打扮、选店、营造氛围；</li>
+        <li>你会用很多「当下的温度」表达你的喜欢，而不是只靠文字。</li>
+      </ul>
+
+      <h3>9.3 你容易遇到的情感难题</h3>
+      <ul>
+        <li><strong>被贴上「玩玩而已」的标签：</strong>你明明认真，只是表达方式比较活泼；</li>
+        <li><strong>不想面对太沉重的对话：</strong>有时候一些该讲清楚的界限被一直往后拖；</li>
+        <li><strong>在关系里过度照顾对方感受，忽略自己的累：</strong>怕气氛变差，宁愿自己多扛一点。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 十、工作 -->
+      <h2><span class="idx">10</span>十、工作氛围 &amp; 职业方向</h2>
+
+      <h3>10.1 你在工作中最在意什么？</h3>
+      <ul>
+        <li>环境有没有一点活力，不要太死气沉沉；</li>
+        <li>能不能真正在一线接触人和真实场景；</li>
+        <li>有没有发挥你审美、表达、社交能力的空间。</li>
+      </ul>
+
+      <h3>10.2 容易磨掉你锐气的环境</h3>
+      <ul>
+        <li>极度僵化、只认死规矩的地方；</li>
+        <li>把你锁在电脑前，一整天只有表格和报告；</li>
+        <li>任何「你要收起所有情绪和个性，变成一个冷冰冰的零件」的环境。</li>
+      </ul>
+
+      <h3>10.3 可以重点探索的方向（给灵感，不是限制）</h3>
+      <ul>
+        <li><strong>偏现场 &amp; 体验：</strong>活动执行 / 策划、导游、旅游 / 体验博主、线下运营、会展 / 展会相关工作；</li>
+        <li><strong>偏表达 &amp; 表演：</strong>主播、主持、表演、舞蹈、综艺 / 娱乐相关；</li>
+        <li><strong>偏服务 &amp; 人：</strong>高端零售、客户体验、餐饮 / 酒旅服务、健身 / 课程教练等。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 十一、成长路线图 -->
+      <h2><span class="idx">11</span>十一、成长路线图：给未来 1～5 年的你</h2>
+      <p>你不需要变成一个「无聊的大人」，只是让你的热情多一点「长久支撑」的底盘。</p>
+
+      <h3>11.1 未来 1 年，可以尝试的三件小事</h3>
+      <ul>
+        <li><strong>给自己设「快乐预算」和「底线存款」两条轨道。</strong>既有可以放心花来体验的那一部分，也有不轻易动的安全感存量。</li>
+        <li><strong>每个月选一件「不那么好玩，但对未来有用」的小事坚持做。</strong>比如一门技能、一个作品、一份作品集更新。</li>
+        <li><strong>练习和最信任的人聊一次「不那么好笑的真心话」。</strong>哪怕只是一小段，把你真实的害怕和焦虑说出来。</li>
+      </ul>
+
+      <h3>11.2 未来 3 年，你可以期待的变化</h3>
+      <ul>
+        <li>你依然很会玩，但你的「玩」里多了专业度和持续性；</li>
+        <li>你开始有一些真正属于自己的作品、经验和人脉；</li>
+        <li>你慢慢摆脱「只是被消费的快乐氛围制造者」，变成「拥有自己舞台的人」。</li>
+      </ul>
+
+      <h3>11.3 未来 5 年，你可能长成的样子</h3>
+      <ul>
+        <li>你依然能带给别人很多快乐和现场感；</li>
+        <li>但你也有了让自己安心的生活基础和节奏；</li>
+        <li>你会更有底气说：「我不是只会玩，我也在认真地经营自己的人生。」</li>
+      </ul>
+
+      <div class="footer-note">
+        <p><strong>最后一段话</strong></p>
+        <p>也许你经常被当成「负责搞笑」「负责带气氛」的那一个。</p>
+        <p>但愿你在读完这份结果的时候，可以在心里，给自己一个更完整的定义：</p>
+        <p><em>「我确实很会让生活好玩一点， 但我也配得上一个不用总逗笑别人、也能被温柔对待的人生。」</em></p>
+        <p class="footer-sign">—— 和 Sam 一起，让你的热情，不只是烟花，而是可以点亮自己路的一束灯。✨</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

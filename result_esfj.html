@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>你的性格倾向：ESFJ | 和 Sam 一起升级大脑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --accent: #c6536b;        /* ESFJ 主色：温柔玫瑰红 */
+      --accent-soft: #ffe9f0;   /* 浅粉背景 */
+      --text-main: #3a2126;
+      --text-light: #6b4b52;
+      --border-soft: #f3c6d1;
+      --tag-bg: #fff7dd;
+      --tag-text: #aa7a00;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #fff6f8 0, #fff2f6 40%, #fdf6f8 100%);
+      color: var(--text-main);
+    }
+
+    .page {
+      max-width: 880px;
+      margin: 32px auto 40px;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(150, 67, 90, 0.13);
+      padding: 32px 24px 32px;
+      border: 1px solid rgba(243, 198, 209, 0.9);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 40px 40px 36px;
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffd9c0 0, #ffb9a4 40%, #ff8b7f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .brand-logo span { font-size: 18px; }
+
+    .brand-name {
+      font-weight: 600;
+      color: #5a3038;
+    }
+
+    .badge-type {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border-soft);
+    }
+
+    .top-meta {
+      font-size: 12px;
+      color: #a77d87;
+      margin-bottom: 4px;
+    }
+
+    .title-block {
+      margin-bottom: 24px;
+    }
+
+    .title-block h1 {
+      font-size: 26px;
+      margin: 4px 0 8px;
+      color: var(--accent);
+    }
+
+    .title-block .subtitle {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .title-block .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+    }
+
+    .title-block .tagline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--tag-text);
+    }
+
+    .hero-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .hero-text {
+      flex: 1 1 260px;
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .hero-text blockquote {
+      margin: 0 0 8px;
+      padding-left: 10px;
+      border-left: 3px solid var(--accent);
+      font-size: 14px;
+      color: #5b323c;
+    }
+
+    .hero-illu {
+      flex: 0 0 150px;
+      text-align: right;
+    }
+
+    .hero-illu img {
+      max-width: 150px;
+      border-radius: 18px;
+      background: var(--accent-soft);
+      padding: 10px;
+      border: 1px solid var(--border-soft);
+    }
+
+    @media (max-width: 640px) {
+      .hero-illu { text-align: left; }
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 28px 0 10px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    h2 span.idx {
+      font-size: 14px;
+      color: #d79baa;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin: 18px 0 8px;
+      color: #7b3545;
+    }
+
+    p {
+      margin: 6px 0;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    ul {
+      margin: 4px 0 10px 18px;
+      padding-left: 0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    li { margin: 2px 0; }
+
+    .keyword-line {
+      margin: 10px 0 0;
+      font-size: 13px;
+      color: #6c414c;
+    }
+
+    .keyword-line span {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .pill-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: #7b3545;
+    }
+
+    .section-hint {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .divider {
+      margin: 28px 0 18px;
+      border-top: 1px dashed #f0ced8;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid #f0ced8;
+      font-size: 13px;
+      color: #5c333d;
+    }
+
+    .footer-note em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .footer-sign {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #8d646f;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="header">
+        <div class="brand">
+          <div class="brand-logo"><span>🧠</span></div>
+          <div>
+            <div class="brand-name">和 Sam 一起升级大脑 · 性格小测试（体验版）</div>
+            <div class="top-meta">本结果为个人认知探索工具，灵感参考 MBTI 理论，但与 MBTI® 官方测评及 Myers-Briggs Company 无关。</div>
+          </div>
+        </div>
+        <div class="badge-type">ESFJ · 温暖组织者</div>
+      </div>
+
+      <div class="title-block">
+        <div class="subtitle">你的性格倾向：ESFJ</div>
+        <h1>把照顾别人当成本能的人</h1>
+        <div class="tagline">
+          <span class="tagline-dot"></span>
+          会为大家张罗好一切 · 也值得被好好照顾
+        </div>
+      </div>
+
+      <div class="hero-row">
+        <div class="hero-text">
+          <blockquote>
+            在很多场合，如果没有你，气氛会尴尬一点，场面会乱一点，很多细节也不会有人记得。
+          </blockquote>
+          <p>这份报告只是从「性格偏好」的角度，帮你看见自己身上那种「很会照顾别人，却常常忽略自己」的力量。真正的你，比「好相处」「热心肠」复杂、立体得多。</p>
+        </div>
+        <div class="hero-illu">
+          <!-- 这里换成你之后给 ESFJ 画的小人形象 -->
+          <img src="img/esfj-avatar.png" alt="ESFJ 卡通形象（占位图，可替换）" />
+        </div>
+      </div>
+
+      <p class="keyword-line">
+        <span>体贴</span>
+        <span>会张罗</span>
+        <span>怕麻烦到别人</span>
+        <span>重视仪式感</span>
+        <span>很少给自己添麻烦</span>
+      </p>
+
+      <!-- 一、总体画像 -->
+      <h2><span class="idx">01</span>一、总体画像：你是一个怎样的人？</h2>
+      <p>很多人只会说「有什么事叫我」，但真正会主动留意别人状态、提前帮忙张罗的人，并不多。而你，往往就是那个「提前想到」的人。</p>
+      <p>你会在心里反复问自己：</p>
+      <ul>
+        <li>大家会不会尴尬？有没有谁被冷落？</li>
+        <li>这件事会不会让人不舒服？我能不能提前避免？</li>
+        <li>怎么做，才能让在场的每个人都感觉被照顾到了？</li>
+      </ul>
+      <p>你习惯站在「关系」和「氛围」的角度看事情，所以常常成为小团体中的润滑剂、组织者、协调者。</p>
+
+      <h3>1.1 你给别人的第一印象</h3>
+      <p><span class="pill-title">初次见面时：</span></p>
+      <ul>
+        <li>温和、有礼貌，不会让人觉得难接近；</li>
+        <li>会自然地寒暄、找话题，帮别人缓解紧张；</li>
+        <li>细节周到：会主动让座、添水、介绍大家互相认识。</li>
+      </ul>
+      <p><span class="pill-title">熟悉之后：</span></p>
+      <ul>
+        <li>很多人会把你视为「很适合倾诉」的对象；</li>
+        <li>你会记住身边人的喜好、雷区、重要日子；</li>
+        <li>你不一定是全场最耀眼，但很容易成为「不可或缺」的那一个。</li>
+      </ul>
+
+      <h3>1.2 你是怎么做决定的？</h3>
+      <p>你做决定时，很自然会考虑三件事：</p>
+      <ul>
+        <li><strong>对人好不好：</strong>会不会伤害到谁？是不是有人因此很为难？</li>
+        <li><strong>氛围顺不顺：</strong>会不会弄得大家尴尬、冷场、撕破脸？</li>
+        <li><strong>现实合不合理：</strong>时间、精力、规则，承受得住吗？</li>
+      </ul>
+      <p>你很少只考虑自己，你脑子里的默认模式通常是「那大家怎么办？」。</p>
+
+      <h3>1.3 你和「讨好」这两个字</h3>
+      <p>有时候，你会被标签成「太会照顾别人」「太会看眼色」，甚至有人会误解为「讨好型人格」。</p>
+      <p>但对你来说，你在意的是：</p>
+      <ul>
+        <li>不要让别人难堪；</li>
+        <li>不要让关系轻易破掉；</li>
+        <li>尽量让在场的人，都能带着舒服的心情回去。</li>
+      </ul>
+      <p>问题不在于你会照顾，而在于：很多时候，你忘记把自己也算进去。</p>
+
+      <div class="divider"></div>
+
+      <!-- 二、优势 -->
+      <h2><span class="idx">02</span>二、你的优势：现实关系网络里的「稳定内核」</h2>
+      <p class="section-hint">这些优点，可能在你自己眼里只是「习惯」，但在很多人眼里很难得。</p>
+
+      <h3>✅ 2.1 情绪感知和体贴度很高</h3>
+      <p>你有非常敏锐的「情绪雷达」：</p>
+      <ul>
+        <li>谁突然变安静了，你能第一时间察觉；</li>
+        <li>谁说「没事啦」，你听得出是不想说、不敢说，还是确实没事；</li>
+        <li>你会根据对方的状态，微调自己的说话方式。</li>
+      </ul>
+
+      <h3>✅ 2.2 会创造「被照顾」的氛围</h3>
+      <p>你不只是听别人倾诉，你会实际行动：</p>
+      <ul>
+        <li>帮忙收拾残局、安排吃饭、组织活动；</li>
+        <li>记得谁最近过得不好，特地发消息问一句「最近还好吗」；</li>
+        <li>用仪式感、小惊喜、小礼物，让人感受到「你有被放在心上」。</li>
+      </ul>
+
+      <h3>✅ 2.3 很适合做「桥梁」</h3>
+      <p>在很多僵持不下的场合，你容易变成：</p>
+      <ul>
+        <li>尝试理解双方立场的人；</li>
+        <li>用比较温柔、婉转的方式帮大家「翻译」的人；</li>
+        <li>在冲突过后，悄悄帮忙修复关系的人。</li>
+      </ul>
+
+      <h3>✅ 2.4 责任感强，不喜欢欠人</h3>
+      <p>你很在意「自己有没有做到位」：</p>
+      <ul>
+        <li>答应了别人，就会记在心里，尽量完成；</li>
+        <li>不太好意思麻烦别人，又很怕自己给人留下不靠谱的印象；</li>
+        <li>会主动帮别人收尾，即使没有人明说。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 三、短板 -->
+      <h2><span class="idx">03</span>三、你的短板：总是把自己排在最后</h2>
+      <p class="section-hint">这些不是你的错，是你长期「把别人放前面」带来的副作用。</p>
+
+      <h3>⚠️ 3.1 容易过度在意别人的评价</h3>
+      <p>你很怕听到这些话：</p>
+      <ul>
+        <li>「你怎么这样啊？」</li>
+        <li>「没想到你是这种人。」</li>
+        <li>「你变了。」</li>
+      </ul>
+      <p>于是你会下意识：</p>
+      <ul>
+        <li>把自己的需求压后一点；</li>
+        <li>先满足别人，再考虑自己；</li>
+        <li>把「别人会不会不开心」放在很前面。</li>
+      </ul>
+
+      <h3>⚠️ 3.2 很难拒绝别人，明明已经很累了</h3>
+      <p>当别人开口请求时，你脑子里先弹出的常常不是「我愿不愿意」，而是：</p>
+      <ul>
+        <li>「他是不是已经没别人可以求了？」</li>
+        <li>「我拒绝会不会很不近人情？」</li>
+      </ul>
+      <p>于是你经常：</p>
+      <ul>
+        <li>答应太多承诺，压到自己喘不过气；</li>
+        <li>在心里埋怨：「为什么只有我在体谅别人？」</li>
+        <li>却又很难真正发火，只会默默消耗自己。</li>
+      </ul>
+
+      <h3>⚠️ 3.3 为了稳住关系，习惯先「委屈自己」</h3>
+      <p>你非常不喜欢撕破脸或冷战，所以当冲突来了，你的默认反应是：</p>
+      <ul>
+        <li>先道歉、先安抚、先收拾情绪；</li>
+        <li>在表达自己不满之前，先把对方的处境考虑一遍；</li>
+        <li>很多话憋在心里，最后累的是自己。</li>
+      </ul>
+
+      <h3>⚠️ 3.4 容易被「理所当然」</h3>
+      <p>因为你太会照顾别人，所以很容易出现这样的局面：</p>
+      <ul>
+        <li>你多做一些，大家觉得正常；</li>
+        <li>你少做一点，反而会被质疑「最近怎么了？」；</li>
+        <li>久而久之，你会觉得：「好像不努力照顾别人，我就不那么被需要。」</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 四、能量 -->
+      <h2><span class="idx">04</span>四、能量条：什么在温柔地滋养你，什么在慢慢掏空你？</h2>
+
+      <h3>🔋 4.1 让你恢复元气的东西</h3>
+      <ul>
+        <li>真诚、平等的交流，不只是你听，也有人听你说；</li>
+        <li>有人主动关心你，而不是你每次都主动问候；</li>
+        <li>小小的认可：一句「谢谢你一直这么用心」，足够让你再撑很久；</li>
+        <li>有一点点稳定的节奏：可预期的作息、温和的关系氛围。</li>
+      </ul>
+
+      <h3>🪫 4.2 在掏空你的东西</h3>
+      <ul>
+        <li>所有人习惯你「多做一点」，却很少问你累不累；</li>
+        <li>你只要提一次自己的需求，就被说成「矫情」；</li>
+        <li>长期待在「谁都有情绪，只有我不能崩」的环境里；</li>
+        <li>付出得很多，却很少得到确实的感谢与回应。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 五、你在团队里的角色 -->
+      <h2><span class="idx">05</span>五、你在团队里的角色：氛围管理 + 细节管家</h2>
+      <p>很多团队如果没有你，整体氛围会冷一点、散一点、人情味少一点。</p>
+
+      <h3>5.1 你自然会做的事</h3>
+      <ul>
+        <li>照顾新人：主动带他们熟悉环境，提醒注意事项；</li>
+        <li>帮大家沟通：有冲突时，用比较温柔的方式传话、解释；</li>
+        <li>记得重要节点：生日、纪念日、团队里值得庆祝的瞬间。</li>
+      </ul>
+
+      <h3>5.2 你带来的价值</h3>
+      <ul>
+        <li>让团队不只是「一起工作的人」，而是真正有情感连接的群体；</li>
+        <li>有人终于会注意到「人是不是撑不住了」，而不是只看业绩表；</li>
+        <li>在很多无形的地方，你帮团队挡掉了很多情绪上的摩擦与损耗。</li>
+      </ul>
+
+      <h3>5.3 给你的提醒</h3>
+      <ul>
+        <li>「照顾团队情绪」不应该是你一个人的工作，这是集体责任；</li>
+        <li>当你明显已经很累，却还在帮大家兜底时，可以问问自己：「如果我是领导，我会允许我的员工这么透支自己吗？」</li>
+        <li>你有权利说：「我需要一点时间处理自己的事，这次可能帮不了太多。」</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 六、家庭 -->
+      <h2><span class="idx">06</span>六、你在家庭中的位置：那个「懂事得让人心疼」的人</h2>
+      <p>在很多家庭系统里，像你这样的人容易被贴上标签：</p>
+      <ul>
+        <li>「最懂事的那个」</li>
+        <li>「不让人操心的那个」</li>
+        <li>「最会照顾别人情绪的那个」</li>
+      </ul>
+
+      <h3>6.1 家庭里的典型角色</h3>
+      <ul>
+        <li>有矛盾时，你会努力站在中间和稀泥；</li>
+        <li>家人有什么烦恼，会来找你倾诉；</li>
+        <li>你会尽量做一个「不给家里添乱」的人。</li>
+      </ul>
+
+      <h3>6.2 容易被忽视的部分</h3>
+      <ul>
+        <li>你的情绪习惯被你自己「自动消音」：难受归难受，该做的你还是照做；</li>
+        <li>家人会觉得「你一直都这么稳」，不太会想到你也需要被安慰；</li>
+        <li>久而久之，你自己也很难把「我其实过得不太好」这句话说出口。</li>
+      </ul>
+
+      <h3>6.3 写给你的提醒</h3>
+      <p>你不需要永远扮演「成熟、懂事、配合」的角色。</p>
+      <ul>
+        <li>你也可以说：「这件事我有点难过。」</li>
+        <li>你也可以承认：「我也会委屈，只是以前习惯自己消化。」</li>
+        <li>当你慢慢敢在家人面前露出一点脆弱，他们才有机会学习「怎么照顾你」。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 七、金钱观 -->
+      <h2><span class="idx">07</span>七、金钱观 &amp; 安全感</h2>
+      <p>一句话总结：钱对你来说，既是安全感，也是「照顾自己和重要的人」的工具。</p>
+
+      <h3>7.1 你对钱的典型态度</h3>
+      <ul>
+        <li>你希望有稳定、可预期的收入，让生活有底气；</li>
+        <li>你愿意为家庭、朋友、重要的仪式感花钱；</li>
+        <li>你会为别人精打细算，却很容易在自己身上省来省去。</li>
+      </ul>
+
+      <h3>7.2 潜在风险</h3>
+      <ul>
+        <li>容易为了照顾家人或关系，牺牲自己很大的空间；</li>
+        <li>不太舍得为「只属于自己」的享受花钱；</li>
+        <li>长期处在「我还不够努力」的自我要求里，对自己的评价很苛刻。</li>
+      </ul>
+
+      <h3>7.3 温柔建议</h3>
+      <ul>
+        <li>可以试着设一笔「只为自己」的小预算，专门用来照顾自己；</li>
+        <li>在给别人花钱之前，先问一句：「那我自己那部分有没有被照顾到？」</li>
+        <li>对你来说，钱除了安全感，也可以是「给自己一点点奖励」的工具。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 八、艺术 & 运动 -->
+      <h2><span class="idx">08</span>八、艺术感受力 &amp; 运动风格</h2>
+
+      <h3>8.1 审美和氛围感</h3>
+      <ul>
+        <li>你对「氛围」「布置」「仪式感」往往很敏感；</li>
+        <li>你会在心里默默记「什么样的细节，会让一个场合变得温暖」；</li>
+        <li>你很适合在日常生活里，创造一些小小的美好：花、灯光、餐桌布置、手写卡片等等。</li>
+      </ul>
+      <p>如果愿意投入一点时间，你在这些方向都有潜力：</p>
+      <ul>
+        <li>活动策划、婚礼/派对布置；</li>
+        <li>生活方式类内容创作（居家、整理、料理、手帐等）；</li>
+        <li>与「氛围设计」「体验设计」相关的工作。</li>
+      </ul>
+
+      <h3>8.2 运动风格</h3>
+      <p>你更容易坚持的运动，多半是：</p>
+      <ul>
+        <li>有人一起的：瑜伽课、团课、舞蹈课、操课；</li>
+        <li>有一点音乐和节奏感的，而不是枯燥的单机训练；</li>
+        <li>氛围不内卷、不羞辱，只是鼓励大家一起变好一点点。</li>
+      </ul>
+      <p>对你来说，运动如果同时满足「身体舒服 + 和人连接」，就会更容易坚持。</p>
+
+      <div class="divider"></div>
+
+      <!-- 九、浪漫 & 亲密关系 -->
+      <h2><span class="idx">09</span>九、浪漫指数 &amp; 亲密关系</h2>
+      <p>总评：非常会在细节里表达爱，但容易在感情里亏待自己。</p>
+
+      <h3>9.1 你心里理想的关系</h3>
+      <ul>
+        <li>两个人可以互相关心，而不是永远你在照顾对方；</li>
+        <li>吵架时，彼此都愿意看见对方的感受，而不是只讲道理；</li>
+        <li>日常生活有一点仪式感，但不需要演给别人看。</li>
+      </ul>
+
+      <h3>9.2 你在爱里的样子</h3>
+      <ul>
+        <li>会用很多具体的小事表达爱：做饭、记得对方的习惯、帮忙安排一切；</li>
+        <li>很难对自己在乎的人说「不」，即使已经很累；</li>
+        <li>会本能地想着：他会不会难过？这句话会不会伤到对方？</li>
+      </ul>
+
+      <h3>9.3 你容易遇到的情感难题</h3>
+      <ul>
+        <li><strong>太难把自己放在同等重要的位置：</strong>你总习惯先照顾别人，再考虑自己。</li>
+        <li><strong>很少正面表达不满：</strong>你害怕一说出来，关系就变差了。</li>
+        <li><strong>容易被「温柔善良的人就应该多付出」这种话绑住：</strong>仿佛你不多做一点，就显得不够好。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 十、工作 -->
+      <h2><span class="idx">10</span>十、工作氛围 &amp; 职业方向</h2>
+
+      <h3>10.1 你在工作中重视什么？</h3>
+      <ul>
+        <li>人际氛围：同事是不是好相处，团队是不是冷冰冰；</li>
+        <li>被尊重感：付出有没有被看见，有没有被当回事；</li>
+        <li>稳定性：太动荡的环境会让你很没有安全感。</li>
+      </ul>
+
+      <h3>10.2 容易磨损你的环境</h3>
+      <ul>
+        <li>办公室充满冷嘲热讽，大家只会互相踩；</li>
+        <li>领导完全无视员工感受，只盯结果和数字；</li>
+        <li>沟通中充满阴阳怪气、被动攻击，而不是直接交流。</li>
+      </ul>
+
+      <h3>10.3 可以重点探索的方向（给灵感，不是限制）</h3>
+      <ul>
+        <li><strong>偏人和服务：</strong>客户服务、教育培训、护理、社工、行政、人力、顾问类工作；</li>
+        <li><strong>偏活动与组织：</strong>活动策划、社群运营、校园/社区类项目组织者；</li>
+        <li>任何需要「让人感到被照顾、被看见」的岗位，你都可能做得很好。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 十一、成长路线图 -->
+      <h2><span class="idx">11</span>十一、成长路线图：给未来 1～5 年的你</h2>
+      <p>不是要你变成一个冷酷自私的人，而是在「照顾别人」的能力上，加一点「照顾自己」的底线。</p>
+
+      <h3>11.1 未来 1 年，可以尝试的三件小事</h3>
+      <ul>
+        <li><strong>每个月，对一个不那么重要的请求说一次「不」。</strong>从小事练习拒绝，让身体记住：拒绝别人，不等于你不好。</li>
+        <li><strong>建立一个只写给自己的小角落。</strong>写下这段时间最累、最委屈、最开心的瞬间，让自己的感受至少被自己看见一次。</li>
+        <li><strong>练习把「我没事」改成「我有点累」。</strong>哪怕只是在最信任的人面前，说一次真话，也算一步。</li>
+      </ul>
+
+      <h3>11.2 未来 3 年，你可以期待的变化</h3>
+      <ul>
+        <li>你依然温柔，但不再轻易因为内疚感而答应所有请求；</li>
+        <li>你开始有能力筛选关系：谁值得你继续付出，谁只是习惯性索取；</li>
+        <li>你在关系中逐渐从「单方面照顾者」，变成「可以被照顾的人」。</li>
+      </ul>
+
+      <h3>11.3 未来 5 年，你可能长成的样子</h3>
+      <ul>
+        <li>你依然善良、有温度，但外面多了一层清晰的边界；</li>
+        <li>你拥有一些真正滋养你的关系，而不是只消耗你的关系；</li>
+        <li>你能更平静地说出自己的需要，也不会因为别人的情绪全盘否定自己。</li>
+      </ul>
+
+      <div class="footer-note">
+        <p><strong>最后一段话</strong></p>
+        <p>你也许一直把「当个好人」「当个体贴的人」当成自己的默认设置。</p>
+        <p>但愿你在读完这份结果的时候，可以慢慢对自己说一句更温柔也更公正的话：</p>
+        <p><em>「我确实很在乎别人，但我也值得被在乎。」</em></p>
+        <p class="footer-sign">—— 和 Sam 一起，把照顾别人的能力，延伸成也能好好照顾自己的能力。🌷</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

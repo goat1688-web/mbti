@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>你的性格倾向：ESTJ | 和 Sam 一起升级大脑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --accent: #2c4f90;        /* ESTJ 主色：深蓝 */
+      --accent-soft: #eef3ff;   /* 浅蓝背景 */
+      --text-main: #333333;
+      --text-light: #666666;
+      --border-soft: #dde3f5;
+      --tag-bg: #fff4d6;
+      --tag-text: #8a5a00;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #f7f8ff 0, #f3f5fc 40%, #f5f7fa 100%);
+      color: var(--text-main);
+    }
+
+    .page {
+      max-width: 880px;
+      margin: 32px auto 40px;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(26, 42, 90, 0.12);
+      padding: 32px 24px 32px;
+      border: 1px solid rgba(214, 221, 240, 0.9);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 40px 40px 36px;
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffd3b3 0, #ffb494 40%, #ff8f81 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .brand-logo span {
+      font-size: 18px;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      color: #444;
+    }
+
+    .badge-type {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border-soft);
+    }
+
+    .title-block {
+      margin-bottom: 24px;
+    }
+
+    .title-block h1 {
+      font-size: 26px;
+      margin: 4px 0 8px;
+      color: var(--accent);
+    }
+
+    .title-block .subtitle {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .title-block .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+    }
+
+    .title-block .tagline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--tag-text);
+    }
+
+    .hero-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .hero-text {
+      flex: 1 1 260px;
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .hero-text blockquote {
+      margin: 0 0 8px;
+      padding-left: 10px;
+      border-left: 3px solid var(--accent);
+      font-size: 14px;
+      color: #444;
+    }
+
+    .hero-illu {
+      flex: 0 0 150px;
+      text-align: right;
+    }
+
+    .hero-illu img {
+      max-width: 150px;
+      border-radius: 18px;
+      background: var(--accent-soft);
+      padding: 10px;
+      border: 1px solid var(--border-soft);
+    }
+
+    @media (max-width: 640px) {
+      .hero-illu {
+        text-align: left;
+      }
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 28px 0 10px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    h2 span.idx {
+      font-size: 14px;
+      color: #9ea9c8;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin: 18px 0 8px;
+      color: #223357;
+    }
+
+    p {
+      margin: 6px 0;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    ul {
+      margin: 4px 0 10px 18px;
+      padding-left: 0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    li {
+      margin: 2px 0;
+    }
+
+    .keyword-line {
+      margin: 10px 0 0;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .keyword-line span {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .pill-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: #223357;
+    }
+
+    .section-hint {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .divider {
+      margin: 28px 0 18px;
+      border-top: 1px dashed #dde1f2;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid #e1e5f5;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .footer-note em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .footer-sign {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #8a92b0;
+    }
+
+    .chip {
+      display: inline-block;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #f3f5ff;
+      color: #6a72a0;
+      border: 1px solid #e0e4ff;
+      margin-right: 6px;
+      margin-top: 4px;
+    }
+
+    .top-meta {
+      font-size: 12px;
+      color: #9ba3c3;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="header">
+        <div class="brand">
+          <div class="brand-logo"><span>🧠</span></div>
+          <div>
+            <div class="brand-name">和 Sam 一起升级大脑 · 性格小测试（体验版）</div>
+            <div class="top-meta">本结果为个人认知探索工具，灵感参考 MBTI 理论，但与 MBTI® 官方测评及 Myers-Briggs Company 无关。</div>
+          </div>
+        </div>
+        <div class="badge-type">ESTJ · 现实派指挥官</div>
+      </div>
+
+      <div class="title-block">
+        <div class="subtitle">你的性格倾向：ESTJ</div>
+        <h1>把混乱变成秩序的人</h1>
+        <div class="tagline">
+          <span class="tagline-dot"></span>
+          现实派指挥官 · 把「没人负责的事」收拾好的人
+        </div>
+      </div>
+
+      <div class="hero-row">
+        <div class="hero-text">
+          <blockquote>
+            当很多人只会抱怨「怎么又乱成这样」的时候，<br />
+            你往往已经开始安排下一步了。
+          </blockquote>
+          <p>这份报告只是从「性格偏好」的角度，帮你看见自己的一部分。真正的你，远远不只是「强势」「会管人」「很能干」这几个标签。</p>
+        </div>
+        <div class="hero-illu">
+          <!-- 这里换成你之后给 ESTJ 画的小人形象 -->
+          <img src="img/estj-avatar.png" alt="ESTJ 卡通形象（占位图，可替换）" />
+        </div>
+      </div>
+
+      <p class="keyword-line">
+        <span>行动派</span>
+        <span>责任感强</span>
+        <span>讲原则</span>
+        <span>不喜欢拖拉</span>
+        <span>习惯扛事</span>
+      </p>
+
+      <!-- 一、总体画像 -->
+      <h2><span class="idx">01</span>一、总体画像：你是一个怎样的人？</h2>
+      <p>很多人看世界的逻辑是：「感觉对就行」「先玩一玩再说嘛」。</p>
+      <p>而你在做事之前，更习惯先问自己：</p>
+      <ul>
+        <li>这件事到底要做到什么标准？</li>
+        <li>谁负责、谁配合、谁来收尾？</li>
+        <li>风险和成本有没有算清楚？</li>
+      </ul>
+      <p>你不太喜欢那种「大家都随缘」的状态，你更习惯做的是：把事情说清楚，把人安排到位，把标准定下来。</p>
+
+      <h3>1.1 你给别人的第一印象</h3>
+      <p><span class="pill-title">初次见面时：</span></p>
+      <ul>
+        <li>说话直接、思路清楚，不喜欢绕弯子。</li>
+        <li>行动感很强，听完一件事，会立刻问「那下一步呢？」。</li>
+        <li>身上有一点自然的「权威感」，别人会下意识把你当成负责人。</li>
+      </ul>
+      <p><span class="pill-title">熟悉之后：</span></p>
+      <ul>
+        <li>会发现你其实挺靠谱、有担当，只是嘴巴有时候不太温柔。</li>
+        <li>你会记得很多细节：时间节点、流程步骤、谁答应了什么。</li>
+        <li>你说话可能有点「硬」，但真要付出的时候，往往冲在最前面。</li>
+      </ul>
+
+      <h3>1.2 你是怎么做决定的？</h3>
+      <p>你做决定时，一般会经历两道「审核」：</p>
+      <p><strong>1️⃣ 现实能不能撑得住？</strong></p>
+      <ul>
+        <li>资源够不够？（时间、人力、钱）</li>
+        <li>风险能不能接受？</li>
+        <li>有没有违背原则或规章？</li>
+      </ul>
+      <p><strong>2️⃣ 责任怎么算得清？</strong></p>
+      <ul>
+        <li>谁负责到底？</li>
+        <li>失败了怎么办？</li>
+        <li>需要谁来背书？</li>
+      </ul>
+      <p>你不太相信那种「先上了再说」的冲动，你更相信「算清楚再上」，这让你少踩了很多别人容易踩的大坑。</p>
+
+      <h3>1.3 你和「掌控感」的关系</h3>
+      <p>你讨厌的不是别人自由，你讨厌的是：</p>
+      <ul>
+        <li>说得很好听，做起来一团糟；</li>
+        <li>没人愿意负责，问题最后都砸在少数人身上；</li>
+        <li>今天一个说法、明天一个新规，完全没有连续性。</li>
+      </ul>
+      <p>于是你会很自然地伸手去「接管」：把流程理清楚、把规则立起来、把松散的东西收拢成一个整体。</p>
+      <p>别人看起来会觉得你「爱管」「控制欲强」，而你内心深处的声音其实是：</p>
+      <blockquote>总得有个人把事情做完吧。</blockquote>
+
+      <div class="divider"></div>
+
+      <!-- 二、优势 -->
+      <h2><span class="idx">02</span>二、你的优势：现实世界里最稀缺的靠谱</h2>
+      <p class="section-hint">这里说的「优势」，不是空洞的夸奖，而是你在现实中可以反复依靠的能力。</p>
+
+      <h3>✅ 2.1 把事情从头推进到尾</h3>
+      <p>你有一种很现实的本事：</p>
+      <ul>
+        <li>不只是会提要求，也会把「步骤」拆出来；</li>
+        <li>不只是盯进度，也会帮大家「收尾」；</li>
+        <li>不只是说「应该怎样」，还会落到「谁来做，哪天前做完」。</li>
+      </ul>
+      <p>在很多团队里，大家都很会聊愿景、聊方向，真正能把东西「做完」的人，往往就那么几个，而你，很容易就是其中之一。</p>
+
+      <h3>✅ 2.2 抗压、扛事的能力</h3>
+      <p>别人一慌，你容易先稳住：</p>
+      <ul>
+        <li>关键节点，你宁可自己多盯一遍，也不放心全交给别人；</li>
+        <li>出现问题，你习惯先想解决方案，而不是先撂挑子；</li>
+        <li>大家都想躲的时候，你会有种「那我来吧」的责任感。</li>
+      </ul>
+      <p>这种抗压，不是因为你天生不怕累，而是你心里那句「事情不能就这样烂掉」，往往会赢过「我不想干了」。</p>
+
+      <h3>✅ 2.3 对规则、流程有直觉</h3>
+      <p>你对「秩序」有一种本能敏锐：</p>
+      <ul>
+        <li>看一件事，就能迅速抓住关键环节和薄弱点；</li>
+        <li>很快发现「哪里该定规则」「哪里该写清楚」；</li>
+        <li>知道哪些东西可以灵活，哪些必须严格。</li>
+      </ul>
+      <p>现实生活里，这意味着你很适合：制定标准、搭流程、监督执行、优化制度。</p>
+
+      <h3>✅ 2.4 有底线、有原则</h3>
+      <p>你可以配合，但不喜欢「黑白不分」；你可以妥协，但有些线过了，你会非常不舒服。</p>
+      <p>你内心可能有一句话：</p>
+      <blockquote>事情可以难一点，但别太不讲道理。</blockquote>
+      <p>这种原则，会让你在很多场合成为「敢说不」的那一个，也是别人真正信得过你的原因。</p>
+
+      <div class="divider"></div>
+
+      <!-- 三、短板 -->
+      <h2><span class="idx">03</span>三、你的短板：容易被说「太凶」「太死板」的地方</h2>
+      <p class="section-hint">优点放大，就会变成短板。下面这些，不是要否定你，而是帮你少一点委屈。</p>
+
+      <h3>⚠️ 3.1 说话太直，杀伤力超出你想象</h3>
+      <p>你习惯就事论事：</p>
+      <ul>
+        <li>「这个方案不行。」</li>
+        <li>「你这个做法很不负责任。」</li>
+      </ul>
+      <p>你可能只是想把事情讲清楚，但别人听到的是：</p>
+      <ul>
+        <li>「你不行。」</li>
+        <li>「你这个人不靠谱。」</li>
+      </ul>
+      <p>于是就出现经典对话：</p>
+      <ul>
+        <li>你心里想的是：「我在帮大家修正问题。」</li>
+        <li>别人心里想的是：「你为什么总是否定我？」</li>
+      </ul>
+      <p>长期下来，有些人会开始怕你、躲你，而不会主动来跟你沟通问题。</p>
+
+      <h3>⚠️ 3.2 容易把「不同意见」当成「不现实」</h3>
+      <p>当有人提一个比较理想化、创意化的设想时，你的第一反应可能是：</p>
+      <ul>
+        <li>「预算呢？」</li>
+        <li>「谁来做？」</li>
+        <li>「后果你想过吗？」</li>
+      </ul>
+      <p>这些质疑本身没有错，它保护了项目不至于乱来，但如果出现得太早、太直接，就容易把一些「还没长大就被掐死」的好点子扼杀掉。</p>
+
+      <h3>⚠️ 3.3 不自觉地把所有事都揽在自己身上</h3>
+      <p>当你觉得别人不够靠谱时，你会有一种本能：</p>
+      <blockquote>算了，我来吧，起码不会烂掉。</blockquote>
+      <p>久而久之，所有麻烦事都绕一圈绕到你这里，你又累又委屈：</p>
+      <ul>
+        <li>事情是你在做，</li>
+        <li>错误也是你背，</li>
+        <li>但功劳未必在你身上。</li>
+      </ul>
+
+      <h3>⚠️ 3.4 很少暴露脆弱，容易被误会成「铁人」</h3>
+      <p>你习惯报喜不报忧：</p>
+      <ul>
+        <li>明明已经很累了，还要说「还行，再撑一下」。</li>
+        <li>其实也会害怕、焦虑，但嘴上还是会说「没事，照做就是」。</li>
+        <li>你很少主动开口求助，哪怕真的快撑不住了。</li>
+      </ul>
+      <p>结果就是：</p>
+      <ul>
+        <li>别人真的以为「你不需要被照顾」。</li>
+        <li>只有你自己知道「其实我也想被当成普通人，而不是永远的顶梁柱」。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 四、能量 -->
+      <h2><span class="idx">04</span>四、能量条：什么在滋养你，什么在悄悄掏空你？</h2>
+
+      <h3>🔋 4.1 让你慢慢充电的东西</h3>
+      <ul>
+        <li>清晰的目标和边界：知道自己该做到哪里，哪些不归自己管；</li>
+        <li>有原则、说话算数的搭档或领导；</li>
+        <li>事情虽然多，但流程基本合理，不是纯粹瞎折腾；</li>
+        <li>关键时刻，有人站出来和你一起承担，而不是只会说「辛苦了」。</li>
+      </ul>
+
+      <h3>🪫 4.2 悄悄掏空你的东西</h3>
+      <ul>
+        <li>开不完的会，却没人真正决策；</li>
+        <li>上面随口一改，下层反复返工；</li>
+        <li>你被视为「解决问题的机器」，而不是一个有情绪的人；</li>
+        <li>在家庭和职场同时被当成「稳的人」，谁都向你要支持，却很少有人反向支持你。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 五、团队 -->
+      <h2><span class="idx">05</span>五、你在团队里的角色：天然的项目经理/班长型人物</h2>
+      <p>很多项目如果没有你，可能早就散了；有你在，至少还能收个像样的尾。</p>
+
+      <h3>5.1 你自然会做的事</h3>
+      <ul>
+        <li>把模糊的想法整理成一份「具体计划」；</li>
+        <li>在会议上问那些别人不太愿意问的现实问题；</li>
+        <li>主动捋时间线、分配任务、盯关键节点；</li>
+        <li>在混乱的时候，先把秩序拉回来，再讨论谁对谁错。</li>
+      </ul>
+
+      <h3>5.2 你带来的价值</h3>
+      <ul>
+        <li><strong>效率与稳定：</strong>让团队不会一直停在「想」的阶段；</li>
+        <li><strong>责任感：</strong>你愿意为自己的决定负责，不甩锅；</li>
+        <li><strong>原则感：</strong>你会为「公平」「标准」发声，避免太多灰色地带。</li>
+      </ul>
+
+      <h3>5.3 你需要给自己的提醒</h3>
+      <ul>
+        <li>不要试图一个人扛下整个团队的情绪和结果；</li>
+        <li>当你觉得自己在「一个人干三个人的活」时，这不是你不够努力，而是系统有问题；</li>
+        <li>适时学会说：「这块如果没有额外资源，我没办法保证质量。」</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 六、家庭 -->
+      <h2><span class="idx">06</span>六、你在家庭中的位置：那个稳住生活节奏的人</h2>
+      <p>在很多家庭里，像你这样的人，很容易被放在「最让人省心、最可靠」的位置。</p>
+
+      <h3>6.1 家庭里的典型角色</h3>
+      <ul>
+        <li>记得缴费、续费、安排体检、处理琐事的人；</li>
+        <li>遇到突发状况，会第一时间冷静处理的人；</li>
+        <li>看起来不太会撒娇，但在实际付出上从不缺席的那一个。</li>
+      </ul>
+
+      <h3>6.2 容易被忽视的部分</h3>
+      <ul>
+        <li>你的辛苦，很多时候被当成「理所当然」；</li>
+        <li>你的情绪波动不大会，因此更容易被忽略；</li>
+        <li>当你偶尔爆发时，别人会觉得「你怎么突然这么多意见」，却不知道那是长期堆积的结果。</li>
+      </ul>
+
+      <h3>6.3 写给你的温柔提醒</h3>
+      <p>你不是天生就该做「大人」的那一个，你也有权利：</p>
+      <ul>
+        <li>偶尔说一句：「这件事我也不想一个人扛。」</li>
+        <li>偶尔承认：「我现在真的很累，需要休息。」</li>
+        <li>偶尔把「完美照顾所有人」的角色放一放，让别人也学习承担责任。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 七、金钱观 -->
+      <h2><span class="idx">07</span>七、金钱观 &amp; 安全感</h2>
+      <p>一句话概括：钱对你来说，既是安全感，也是责任的基础。</p>
+
+      <h3>7.1 你对钱的典型态度</h3>
+      <ul>
+        <li>你更愿意为「稳定生活」「家人的保障」「看得见的实用东西」花钱；</li>
+        <li>对一些「只为面子」的消费，你内心可能是：能省则省；</li>
+        <li>你相信「好好算账、不乱来」比所谓一夜暴富要靠谱得多。</li>
+      </ul>
+
+      <h3>7.2 潜在的风险点</h3>
+      <ul>
+        <li>容易为了稳定收入，长期忍受不合理的环境；</li>
+        <li>有时会把「赚钱」等同于「必须一直顶住」，不允许自己休息；</li>
+        <li>对投资、理财可能偏保守，担心风险到不敢迈出任何一步。</li>
+      </ul>
+
+      <h3>7.3 给你的小建议</h3>
+      <ul>
+        <li>给自己设一个<strong>「基本安心线」</strong>，而不是无限上纲：「只要我能稳定守住 XX 的储蓄 / 收入，就不再用『不够好』这种词来攻击自己。」</li>
+        <li>不用一上来就做高风险投资，可以从「看得懂的小步尝试」开始；</li>
+        <li>别把「照顾好家人」全部等同于「多赚钱」——情绪上的陪伴和沟通，同样重要。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 八、艺术 & 运动 -->
+      <h2><span class="idx">08</span>八、艺术感受力 &amp; 运动风格</h2>
+
+      <h3>8.1 审美 &amp; 艺术感受</h3>
+      <ul>
+        <li>你欣赏耐用、扎实、有质感的东西，而不是只看表面华丽；</li>
+        <li>对空间和环境的整洁程度比较敏感——乱到一定程度，你会很难受；</li>
+        <li>你不太追逐极端小众，更喜欢「实用 + 好看」的平衡。</li>
+      </ul>
+      <p>这意味着，如果你愿意投入心力，你在：</p>
+      <ul>
+        <li>体系化整理、家居布置、空间规划；</li>
+        <li>做「说明书」「使用手册」「教程类内容」；</li>
+        <li>用清晰、直观的方式表达复杂内容等方向上，都有潜力做得很专业。</li>
+      </ul>
+
+      <h3>8.2 运动风格</h3>
+      <p>你对运动的期待更偏向：「保持状态、增强体力、别老是疲惫。」</p>
+      <ul>
+        <li>有清晰目标的运动：如力量训练、跑步打卡、健身计划；</li>
+        <li>有结构、有规则的运动：如球类、团体项目；</li>
+        <li>可以看见进步曲线的锻炼方式。</li>
+      </ul>
+      <p>你不一定需要多炫的技巧，能让身体保持硬朗、有劲儿，就是很好的投资。</p>
+
+      <div class="divider"></div>
+
+      <!-- 九、浪漫 & 亲密 -->
+      <h2><span class="idx">09</span>九、浪漫指数 &amp; 亲密关系</h2>
+      <p>总体评价：表达方式不一定浪漫，但可靠程度往往很高。</p>
+
+      <h3>9.1 你心里理想的关系</h3>
+      <ul>
+        <li>两个人说话可以直来直去，不用总是拐弯抹角；</li>
+        <li>说到的事情可以真正落地，而不是只有甜言蜜语；</li>
+        <li>对方愿意和你一起规划现实，而不是把所有事都甩给你一个人想。</li>
+      </ul>
+      <p>你在乎的浪漫，不是某一天的仪式，而是<strong>长期稳定的在场 + 共同承担现实</strong>。</p>
+
+      <h3>9.2 你在爱里的样子</h3>
+      <ul>
+        <li>你不太会说很多好听的话，但会记得对方的实际需求；</li>
+        <li>你会尝试「把生活安排好」来表达爱：接送、照顾、计划、承担；</li>
+        <li>你对承诺很慎重，一旦答应，通常会尽力做到。</li>
+      </ul>
+
+      <h3>9.3 你容易遇到的情感难题</h3>
+      <ul>
+        <li><strong>把照顾对方，当成默认责任：</strong>久而久之，你可能会发现自己的付出被当成理所当然。</li>
+        <li><strong>表达感受时，容易变成指责语气：</strong>你心里其实是难过、失望、委屈，但说出口时，很容易变成「控诉」。</li>
+        <li><strong>很难开口说「我也需要被照顾」：</strong>你习惯在关系里扮演「稳的人」，要承认自己脆弱，会觉得很别扭。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 十、工作 -->
+      <h2><span class="idx">10</span>十、工作氛围 &amp; 职业方向</h2>
+
+      <h3>10.1 你在工作中最在意什么？</h3>
+      <ul>
+        <li>规则清楚，不朝令夕改；</li>
+        <li>职责分明，出了问题能分得清责任；</li>
+        <li>上级说话算数，团队基本靠谱；</li>
+        <li>做的事情有实际效果，而不是整天做样子。</li>
+      </ul>
+
+      <h3>10.2 容易磨损你的工作环境</h3>
+      <ul>
+        <li>决策随意，今天一个版本明天一个；</li>
+        <li>只看「谁会说话」，不看「谁真正把事情做好」；</li>
+        <li>上面一味加码，下面没配套资源，全靠你硬撑；</li>
+        <li>成功了归大家，出事了怪你。</li>
+      </ul>
+      <p>在这种环境里久了，你会越来越疲惫、甚至麻木，对管理层失去信任，最后通过沉默离开。</p>
+
+      <h3>10.3 适合你的工作风格</h3>
+      <ul>
+        <li>有清晰目标和时间线；</li>
+        <li>能够参与制定或优化规则、流程；</li>
+        <li>可以实实在在看到成果和影响，而不是只做「形式」。</li>
+      </ul>
+
+      <h3>10.4 可探索的职业方向（仅作灵感）</h3>
+      <ul>
+        <li><strong>偏管理 &amp; 执行：</strong>项目管理、运营管理、后勤与供应链管理、一线管理者（班组长、店长、门店负责人、部门主管等）。</li>
+        <li><strong>偏制度 &amp; 监督：</strong>行政管理、人力制度与流程、政府/事业单位/传统大企业里的执行与监察岗位。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 十一、成长路线图 -->
+      <h2><span class="idx">11</span>十一、成长路线图：给未来 1～5 年的你</h2>
+      <p>不讲「要变成多成功的大人物」，只讲你在现实生活中可以慢慢做到的事。</p>
+
+      <h3>11.1 未来 1 年，可以尝试的三件小事</h3>
+      <ul>
+        <li><strong>把「我要管好一切」改成「我只负责我该负责的那一块」。</strong>列一张清单：哪些是你必须负责的，哪些其实可以分出去；对不合理的额外负担，尝试练习说：「这部分如果没有资源支持，我可能做不了。」</li>
+        <li><strong>每个月，练习一次温和但坚定的界限表达。</strong>例如：「这件事我可以帮，但截止时间可能要再往后一点。」或者「这次我想先照顾好自己的安排，就不另外加活了。」</li>
+        <li><strong>为自己留一个「绝对休息」的时间块。</strong>哪怕每周只有半天，这段时间尽量不处理他人的紧急事，只用来休息、恢复、思考，把自己的生活也当成一个需要管理的「项目」。</li>
+      </ul>
+
+      <h3>11.2 未来 3 年，你可以期待的变化</h3>
+      <ul>
+        <li>你会更清楚什么是「我的责任」，什么是「别人在甩锅」。</li>
+        <li>你会从「凡事都要自己扛」变成「我可以要求合理的支持」。</li>
+        <li>你会发现，有一些关系和环境，是可以换掉的，而不是只能硬撑。</li>
+      </ul>
+
+      <h3>11.3 未来 5 年，你可能长成的样子</h3>
+      <ul>
+        <li>你依然有很强的执行力和责任感；</li>
+        <li>但你的边界更清晰了，不再习惯性接所有烂摊子；</li>
+        <li>你会在稳定靠谱的基础上，多了一些柔软——不再对自己那么苛刻，也允许自己偶尔只是一个普通人。</li>
+      </ul>
+
+      <div class="footer-note">
+        <p><strong>最后一段话</strong></p>
+        <p>你也许常常觉得：「我也没多厉害，只是比别人多负责任一点。」</p>
+        <p>但很多系统能够勉强运转，往往就是因为有一小群像你这样的人，在关键的地方撑着，没有完全坍塌。</p>
+        <p>当你又一次在深夜收拾别人留下的烂摊子、又一次在别人都散场后还在处理最后细节的时候，希望你能在心里，对自己说一句更公平的话：</p>
+        <p><em>「我确实有点凶，也有点轴， 可我一直在认真守住我相信的东西。光是这一点，就已经很难得了。」</em></p>
+        <p class="footer-sign">—— 和 Sam 一起，在继续做一个可靠大人的同时，也慢慢学会，好好照顾那个只想歇一会儿的自己。🌱</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

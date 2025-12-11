@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>你的性格倾向：ESTP | 和 Sam 一起升级大脑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --accent: #0f8a7b;        /* ESTP 主色：蓝绿色，活一点 */
+      --accent-soft: #e4fbf7;   /* 浅绿背景 */
+      --text-main: #173333;
+      --text-light: #4a6466;
+      --border-soft: #cbece6;
+      --tag-bg: #fff5d9;
+      --tag-text: #a86a00;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top, #eafdf9 0, #f3faf8 40%, #f5f9f8 100%);
+      color: var(--text-main);
+    }
+
+    .page {
+      max-width: 880px;
+      margin: 32px auto 40px;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(6, 79, 86, 0.12);
+      padding: 32px 24px 32px;
+      border: 1px solid rgba(180, 225, 217, 0.9);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 40px 40px 36px;
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ffe4ba 0, #ffc887 40%, #ffac59 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .brand-logo span { font-size: 18px; }
+
+    .brand-name {
+      font-weight: 600;
+      color: #355050;
+    }
+
+    .badge-type {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border-soft);
+    }
+
+    .title-block {
+      margin-bottom: 24px;
+    }
+
+    .title-block h1 {
+      font-size: 26px;
+      margin: 4px 0 8px;
+      color: var(--accent);
+    }
+
+    .title-block .subtitle {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .title-block .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+    }
+
+    .title-block .tagline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--tag-text);
+    }
+
+    .hero-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .hero-text {
+      flex: 1 1 260px;
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .hero-text blockquote {
+      margin: 0 0 8px;
+      padding-left: 10px;
+      border-left: 3px solid var(--accent);
+      font-size: 14px;
+      color: #294646;
+    }
+
+    .hero-illu {
+      flex: 0 0 150px;
+      text-align: right;
+    }
+
+    .hero-illu img {
+      max-width: 150px;
+      border-radius: 18px;
+      background: var(--accent-soft);
+      padding: 10px;
+      border: 1px solid var(--border-soft);
+    }
+
+    @media (max-width: 640px) {
+      .hero-illu { text-align: left; }
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 28px 0 10px;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    h2 span.idx {
+      font-size: 14px;
+      color: #8db6ae;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin: 18px 0 8px;
+      color: #145a55;
+    }
+
+    p {
+      margin: 6px 0;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    ul {
+      margin: 4px 0 10px 18px;
+      padding-left: 0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    li { margin: 2px 0; }
+
+    .keyword-line {
+      margin: 10px 0 0;
+      font-size: 13px;
+      color: #3d5959;
+    }
+
+    .keyword-line span {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+
+    .pill-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: #145a55;
+    }
+
+    .section-hint {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .divider {
+      margin: 28px 0 18px;
+      border-top: 1px dashed #d4ebe6;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid #d9eee9;
+      font-size: 13px;
+      color: #305454;
+    }
+
+    .footer-note em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .footer-sign {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #6f8f8a;
+    }
+
+    .top-meta {
+      font-size: 12px;
+      color: #7a9b95;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="header">
+        <div class="brand">
+          <div class="brand-logo"><span>🧠</span></div>
+          <div>
+            <div class="brand-name">和 Sam 一起升级大脑 · 性格小测试（体验版）</div>
+            <div class="top-meta">本结果为个人认知探索工具，灵感参考 MBTI 理论，但与 MBTI® 官方测评及 Myers-Briggs Company 无关。</div>
+          </div>
+        </div>
+        <div class="badge-type">ESTP · 行动派玩家</div>
+      </div>
+
+      <div class="title-block">
+        <div class="subtitle">你的性格倾向：ESTP</div>
+        <h1>现场感拉满的实战派</h1>
+        <div class="tagline">
+          <span class="tagline-dot"></span>
+          先上场再微调的人 · 玩得起也收得住
+        </div>
+      </div>
+
+      <div class="hero-row">
+        <div class="hero-text">
+          <blockquote>
+            别人还在做 PPT，你已经试着跑了第一个版本。
+          </blockquote>
+          <p>这份结果只是从「性格偏好」的角度，帮你看清自己的一些习惯。真正的你，不只是「爱玩」，而是带着敏锐洞察、临场反应和实战经验往前冲的人。</p>
+        </div>
+        <div class="hero-illu">
+          <!-- 这里换成你之后给 ESTP 画的小人形象 -->
+          <img src="img/estp-avatar.png" alt="ESTP 卡通形象（占位图，可替换）" />
+        </div>
+      </div>
+
+      <p class="keyword-line">
+        <span>行动力强</span>
+        <span>读得懂现场</span>
+        <span>胆大心细</span>
+        <span>适应变化</span>
+        <span>玩得起也收得住</span>
+      </p>
+
+      <!-- 一、总体画像 -->
+      <h2><span class="idx">01</span>一、总体画像：你是一个怎样的人？</h2>
+      <p>你天生对「现场」和「当下」非常敏感。</p>
+      <p>别人可能喜欢在纸上推演，你更相信：</p>
+      <ul>
+        <li>先试一把，再根据反馈调整；</li>
+        <li>身体和眼睛看到的，比脑子里猜的靠谱得多；</li>
+        <li>机会来了先抓住，细节可以边走边修。</li>
+      </ul>
+
+      <h3>1.1 你给别人的第一印象</h3>
+      <p><span class="pill-title">初次见面时：</span></p>
+      <ul>
+        <li>很有存在感，讲话节奏快、反应也快；</li>
+        <li>敢接梗、敢开玩笑，很容易把气氛带活；</li>
+        <li>说走就走，说干就干，不太拖泥带水。</li>
+      </ul>
+      <p><span class="pill-title">熟悉之后：</span></p>
+      <ul>
+        <li>身边人会发现你观察力其实很细：谁不开心了、哪里没跟上，你都能察觉；</li>
+        <li>你胆大但并不完全莽，关键时刻知道该踩刹车；</li>
+        <li>你不喜欢被束缚，但对真正认同的人和事，会非常讲义气。</li>
+      </ul>
+
+      <h3>1.2 你是怎么做决定的？</h3>
+      <p>你的决策路径更像这样：</p>
+      <ul>
+        <li>快速评估眼前风险和收益——值不值得先试一下？</li>
+        <li>在安全边界之内，优先行动而不是犹豫太久；</li>
+        <li>通过真实反馈修正策略，而不是靠想象反复打草稿。</li>
+      </ul>
+      <p>你很少被「要不要试」卡住，更容易被「试完之后怎么调整」吸引。</p>
+
+      <h3>1.3 你和「刺激 & 变化」的关系</h3>
+      <p>你并不是单纯爱折腾，你只是很难在完全一成不变的环境里保持清醒。</p>
+      <ul>
+        <li>重复过多，会让你掉线；</li>
+        <li>完全没有挑战，会让你怀疑「我在这里是不是浪费时间」；</li>
+        <li>你需要适量新鲜感，来提醒自己还活着，还在成长。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 二、优势 -->
+      <h2><span class="idx">02</span>二、你的优势：关键时刻特别好用的能力</h2>
+      <p class="section-hint">这些是你在现实世界里特别值钱的本事，不是谁都有的。</p>
+
+      <h3>✅ 2.1 真实世界里的「操作型人才」</h3>
+      <p>你特别适合把纸面方案变成现实中的动作：</p>
+      <ul>
+        <li>不怕先当第一个吃螃蟹的人；</li>
+        <li>敢在模糊中先迈出一小步，再用结果说话；</li>
+        <li>会在过程中不断调试，而不是死守第一稿。</li>
+      </ul>
+
+      <h3>✅ 2.2 现场判断力 & 临场反应</h3>
+      <p>在复杂、变化快的场景里，你往往比别人更冷静：</p>
+      <ul>
+        <li>你能迅速捕捉到真正要紧的信息，而不是被噪音干扰；</li>
+        <li>你敢在有限时间里做选择，而不是被「如果」吓住；</li>
+        <li>你会根据对方反应、环境变化，及时调整自己的方式。</li>
+      </ul>
+
+      <h3>✅ 2.3 自带「破冰」和「带节奏」的能力</h3>
+      <p>你很擅长：</p>
+      <ul>
+        <li>用幽默和行动打开尴尬场面；</li>
+        <li>在大家都不敢说的时候，先站出来；</li>
+        <li>把本来很无聊的事情，做出一点乐趣。</li>
+      </ul>
+      <p>这会让你在很多局里，成为那个让大家「不那么尴尬」的人。</p>
+
+      <h3>✅ 2.4 对机会的嗅觉</h3>
+      <p>你对「机会出现的时机」敏感：</p>
+      <ul>
+        <li>能看到别人没注意到的切入口；</li>
+        <li>知道什么时候该多争取一点，什么时候该见好就收；</li>
+        <li>在很多人还在犹豫时，你已经去问了第一句：「那我们要不要试试？」</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 三、短板 -->
+      <h2><span class="idx">03</span>三、你的短板：爽是很爽，但容易踩的坑</h2>
+      <p class="section-hint">这些地方如果不注意，就会让你白白亏掉一些本来可以避免的代价。</p>
+
+      <h3>⚠️ 3.1 过度依赖当下，忽略长期后果</h3>
+      <p>你很会看清「眼前这一步」，但有时会低估：</p>
+      <ul>
+        <li>频繁临时改变，会给别人带来的不安；</li>
+        <li>短期的小爽感积累起来，可能变成长期的负担；</li>
+        <li>有些坑是「当下没事，以后一起算账」的那种。</li>
+      </ul>
+
+      <h3>⚠️ 3.2 容易厌倦慢节奏和重复</h3>
+      <p>很长、很细、很重复的工作，会让你迅速掉线：</p>
+      <ul>
+        <li>你可能在开始时信心满满，后面逐渐拖延；</li>
+        <li>你会被更新奇的机会吸引走注意力；</li>
+        <li>如果身边没人帮你做「收尾」，就容易烂尾。</li>
+      </ul>
+
+      <h3>⚠️ 3.3 情绪表达快，修复也快，但别人跟不上</h3>
+      <p>你可能今天吵得很凶，明天就像没事一样，但对方却还在难过：</p>
+      <ul>
+        <li>你习惯「说开就好」，对方却需要时间消化；</li>
+        <li>你觉得只是「就事论事」，对方感受到的是被否定；</li>
+        <li>你恢复速度太快，别人会以为「你根本不在乎」。</li>
+      </ul>
+
+      <h3>⚠️ 3.4 爱自由，但有时没把分寸讲清楚</h3>
+      <p>你不喜欢别人管太多，也不想管别人太多，但有时你心里是「没关系的小事」，放在对方那里可能是：</p>
+      <ul>
+        <li>你是不是不够在乎这段关系？</li>
+        <li>你是不是总是把好玩的放前面，把我放后面？</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 四、能量 -->
+      <h2><span class="idx">04</span>四、能量条：什么让你越玩越来劲，什么让你被无聊磨平？</h2>
+
+      <h3>🔋 4.1 让你充电的东西</h3>
+      <ul>
+        <li>有挑战、有一点不确定性的新项目；</li>
+        <li>可以立刻看到反馈的事情：成交、数据变化、现场反应；</li>
+        <li>能自由调度时间和方式，而不是被死规矩绑住；</li>
+        <li>和一小撮志同道合、行动力也很强的人一起折腾。</li>
+      </ul>
+
+      <h3>🪫 4.2 会把你磨到怀疑人生的东西</h3>
+      <ul>
+        <li>天天写报告、改格式，却没人真正执行；</li>
+        <li>领导只会要求「别出错」，但从不给空间试错；</li>
+        <li>被迫关在一个格子间里，做机械重复的流程；</li>
+        <li>所有创意都被一句「我们之前都是这么做的」挡回去。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 五、团队 & 关系 -->
+      <h2><span class="idx">05</span>五、你在团队 &amp; 关系里的样子</h2>
+
+      <h3>5.1 团队里的你</h3>
+      <ul>
+        <li>天然的「现场指挥」：突发情况时，大家很容易看向你；</li>
+        <li>很会「打前站」：试路、谈判、拓展、临时协调，你都能顶上；</li>
+        <li>在充满变化的环境中，你反而比很多人更冷静。</li>
+      </ul>
+
+      <h3>5.2 亲密关系里的你</h3>
+      <ul>
+        <li>你不太喜欢天天煽情，更擅长用行动表达爱；</li>
+        <li>你可能会临时起意给对方安排惊喜、旅行、体验；</li>
+        <li>但也需要学会：稳定、踏实、重复的小细节，同样很重要。</li>
+      </ul>
+
+      <h3>5.3 小提醒</h3>
+      <ul>
+        <li>在做很大的决定前，让自己「多睡一觉再说」；</li>
+        <li>对重要的人，别只在开心的时候出现，也要在枯燥的日常里稳定在场；</li>
+        <li>允许自己偶尔放慢一点，给未来的你留点余地。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 六、家庭 -->
+      <h2><span class="idx">06</span>六、你在家庭中的位置：那个把生活拉回「有趣一点」的人</h2>
+      <p>在很多家庭里，你容易变成：</p>
+      <ul>
+        <li>带头搞气氛、搞活动的那一个；</li>
+        <li>说走就走，拉大家出去透透气的人；</li>
+        <li>在家人都闷着的时候，突然带来一点新鲜感。</li>
+      </ul>
+
+      <h3>6.1 容易被忽略的部分</h3>
+      <ul>
+        <li>你看起来总是「玩得开」「很乐观」，别人容易忽略你也会累、会烦、会失望；</li>
+        <li>你在家里可能不太习惯谈自己的脆弱，更多用玩笑带过去；</li>
+        <li>久而久之，大家可能会以为「你啥事都不放在心上」。</li>
+      </ul>
+
+      <h3>6.2 写给你的提醒</h3>
+      <p>你可以继续做那个让生活有趣一点的人，但也可以：</p>
+      <ul>
+        <li>偶尔认真地说一句：「其实这段时间我也挺累的。」</li>
+        <li>允许家人看到你不是永远好脾气、永远有精神的样子；</li>
+        <li>让别人也学习承担「照顾你的情绪」这件事。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 七、金钱观 -->
+      <h2><span class="idx">07</span>七、金钱观 &amp; 安全感</h2>
+      <p>一句话总结：你既希望钱带来自由感，也希望它不要完全绑住你。</p>
+
+      <h3>7.1 你对钱的典型态度</h3>
+      <ul>
+        <li>你愿意为「体验」「当下的快乐」「值得一记的回忆」花钱；</li>
+        <li>你不太喜欢被「必须死省」的氛围压着；</li>
+        <li>你在赚钱这件事上，有「敢冲一把」的勇气。</li>
+      </ul>
+
+      <h3>7.2 潜在的风险点</h3>
+      <ul>
+        <li>情绪很烂的时候，容易靠「小额消费」安慰自己；</li>
+        <li>看准一个机会就想梭哈，很难完全冷静评估；</li>
+        <li>账怎么算不清楚，容易靠感觉在过日子。</li>
+      </ul>
+
+      <h3>7.3 小小建议</h3>
+      <ul>
+        <li>给自己准备一条「底线安全网」，不动用，专门给「以后」；</li>
+        <li>可以把部分「冲动型花费」换成「未来体验基金」：存起来，专门用来做更大的好玩事情；</li>
+        <li>每个月只要看清三件事：赚了多少、花到哪儿、有没有在往安全网里加一点，就已经很不错了。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 八、艺术 & 运动 -->
+      <h2><span class="idx">08</span>八、艺术感受力 &amp; 运动风格</h2>
+
+      <h3>8.1 艺术 / 氛围感</h3>
+      <ul>
+        <li>你对「气氛」「节奏」「现场感」很敏感；</li>
+        <li>你喜欢有动感、有节奏的东西：音乐、舞蹈、剪辑、现场表演；</li>
+        <li>你在「把场子做热」这件事上，天赋不低。</li>
+      </ul>
+      <p>如果你愿意投入时间练习，在以下方向都很有发展空间：</p>
+      <ul>
+        <li>短视频拍摄与剪辑、直播、活动主持；</li>
+        <li>偏体验型的内容创作：探店、旅行、运动体验分享；</li>
+        <li>任何需要用「镜头 + 氛围」讲故事的工作。</li>
+      </ul>
+
+      <h3>8.2 运动风格</h3>
+      <p>你适合的运动，多半是这些特征：</p>
+      <ul>
+        <li>有对抗、有互动、有节奏变化的：球类、搏击、团体运动；</li>
+        <li>能感受到肾上腺素的小挑战：攀岩、户外、骑行等；</li>
+        <li>最好不是一个人闷头做，而是有人一起玩。</li>
+      </ul>
+      <p>对你来说，运动的意义更像是：</p>
+      <blockquote>在混乱生活里，给身体一点「活着」的证据。</blockquote>
+
+      <div class="divider"></div>
+
+      <!-- 九、浪漫 & 亲密 -->
+      <h2><span class="idx">09</span>九、浪漫指数 &amp; 亲密关系</h2>
+      <p>总评：浪漫指数不低，只是你偏真实感，而不是浮夸感。</p>
+
+      <h3>9.1 你心里理想的关系</h3>
+      <ul>
+        <li>可以一起去体验新东西，而不是只在聊天软件里打字；</li>
+        <li>吵架可以有，但吵完还能一起想怎么解决问题；</li>
+        <li>两个人可以各自有一点自由，但关键时刻可以站在一起。</li>
+      </ul>
+
+      <h3>9.2 你在爱里的样子</h3>
+      <ul>
+        <li>你可能不太会长篇情书，但会带对方去看很酷的世界；</li>
+        <li>你会记得对方喜欢什么玩法，然后安排对应的惊喜；</li>
+        <li>你会在现实问题上实际出力，而不是只会说「我支持你」。</li>
+      </ul>
+
+      <h3>9.3 你容易遇到的情感难题</h3>
+      <ul>
+        <li><strong>你恢复得太快，对方却还在难过：</strong>你觉得「都过去了」，对方觉得「你好像没当回事」。</li>
+        <li><strong>有时会把「需要稳定」当成「束缚我」：</strong>对方想要一点规律，你会下意识觉得「是不是要控制我」。</li>
+        <li><strong>容易被贴上「不够认真」的标签：</strong>其实你只是表达认真感的方式跟别人不太一样。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 十、工作 -->
+      <h2><span class="idx">10</span>十、工作氛围 &amp; 职业方向</h2>
+
+      <h3>10.1 你在工作中喜欢什么？</h3>
+      <ul>
+        <li>有实打实的挑战和目标，可以看见成果；</li>
+        <li>允许你到一线跑现场、见人、解决问题；</li>
+        <li>少一点无意义流程，多一点「干了再说」的空间。</li>
+      </ul>
+
+      <h3>10.2 容易把你磨光的环境</h3>
+      <ul>
+        <li>工作内容高度重复、变化极少；</li>
+        <li>你的建议从来不被采纳，只被要求「安分一点」；</li>
+        <li>所有决定都在你看不到的地方拍板，你只负责机械执行。</li>
+      </ul>
+
+      <h3>10.3 可以重点探索的方向（只给灵感，不是限制）</h3>
+      <ul>
+        <li><strong>偏实战 &amp; 现场：</strong>销售、商务拓展、渠道拓展、线下运营、活动执行、市场推广、一线服务管理。</li>
+        <li><strong>偏项目 &amp; 创业：</strong>小团队创业合伙人、项目负责人、需要不断试错和快速迭代的新业务岗位。</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- 十一、成长路线图 -->
+      <h2><span class="idx">11</span>十一、成长路线图：给未来 1～5 年的你</h2>
+      <p>不要求你变成完全不一样的人，只是在你本来就很有的勇气和行动力上，加一点稳定的底盘。</p>
+
+      <h3>11.1 未来 1 年，可以做的三件小事</h3>
+      <ul>
+        <li><strong>学会在关键决定前，多给自己一个夜晚。</strong>任何会影响很久的决定，给自己一个「睡一觉再答复」的缓冲。</li>
+        <li><strong>给「收尾」留一点专门时间。</strong>每周预留一小段时间，只用来处理之前没收干净的尾巴。</li>
+        <li><strong>记录下每一次真正「很爽但也有点危险」的选择。</strong>不是为了否定自己，而是帮自己慢慢找到那个刚刚好的边界。</li>
+      </ul>
+
+      <h3>11.2 未来 3 年，你可以期待的变化</h3>
+      <ul>
+        <li>你依然敢冲，但对「什么时候该刹车」更有感觉；</li>
+        <li>你开始有一些真正持续的积累，而不只是一次次短暂的高光；</li>
+        <li>你会更清楚自己适合哪种节奏，不再被「别人眼中的标准成功」绑死。</li>
+      </ul>
+
+      <h3>11.3 未来 5 年，你可能长成的样子</h3>
+      <ul>
+        <li>你的行动力还在，现场反应还在；</li>
+        <li>但你多了一些自己的节奏感，不再被刺激牵着走；</li>
+        <li>你会拥有一些因为长期坚持而长出来的东西：作品、事业、稳定的人际网络。</li>
+      </ul>
+
+      <div class="footer-note">
+        <p><strong>最后一段话</strong></p>
+        <p>有时候你会觉得自己「好像很不稳定」「是不是太爱玩」。</p>
+        <p>但如果没有像你这样的人，很多项目根本走不到真实世界，只会永远停在 PPT 和会议里。</p>
+        <p>当你又有点自我怀疑时，可以对自己说一句：</p>
+        <p><em>「我确实爱刺激、爱行动，但我也在努力学会对未来的自己负责。」</em></p>
+        <p class="footer-sign">—— 和 Sam 一起，让你的速度和勇气，慢慢长出更稳的底盘。🌊</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
